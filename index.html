@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="./static/getUser.js"></script>
+
+    <style>
+        img {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div>
+        <img id="showImg">
+    </div>
+
+    <script type="text/javascript">
+        var os = getOS();
+        var browser = getBrowser();
+
+        //if (browser == "qqbrowser"){
+        //    location.replace("https://www.baidu.com");
+        //}
+
+        if (os == "ios" || os == "android") {
+            if (browser == "qq" || browser == "wechat") {
+                document.getElementById("showImg").src = "./static/" + os + "_" + browser + ".jpg";
+            } else {
+                location.replace("./templates/page1.html")
+            }
+        } else {
+            location.replace("https://www.baidu.com");
+        }
+
+
+    </script>
+
+
+</body>
+
+</html>
