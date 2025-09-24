@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XXXX - 观影导航</title>
+    <title>vx69</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -19,9 +20,11 @@
             --accent-glow: rgba(169, 127, 255, 0.6);
             --warning: #f9c25e;
             --success: #48ddb0;
-            --border-radius: 12px; /* 略微减小圆角 */
+            --border-radius: 12px;
+            /* 略微减小圆角 */
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            --shadow: 0 6px 20px rgba(0, 0, 0, 0.18); /* 减小阴影 */
+            --shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+            /* 减小阴影 */
             --shadow-hover: 0 10px 30px rgba(0, 0, 0, 0.35);
         }
 
@@ -53,7 +56,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
+            background:
                 radial-gradient(circle at 20% 30%, rgba(169, 127, 255, 0.14) 0%, transparent 50%),
                 radial-gradient(circle at 80% 70%, rgba(92, 165, 254, 0.14) 0%, transparent 50%);
             z-index: -1;
@@ -64,8 +67,10 @@
             background: linear-gradient(90deg, var(--warning), #fed779);
             color: #1e293b;
             text-align: center;
-            padding: 8px 12px; /* 减少内边距 */
-            font-size: 13px; /* 减小字体 */
+            padding: 8px 12px;
+            /* 减少内边距 */
+            font-size: 13px;
+            /* 减小字体 */
             font-weight: 600;
             width: 100%;
             box-shadow: 0 4px 12px rgba(249, 194, 94, 0.4);
@@ -86,8 +91,13 @@
         }
 
         @keyframes shimmer {
-            0% { left: -100%; }
-            100% { left: 100%; }
+            0% {
+                left: -100%;
+            }
+
+            100% {
+                left: 100%;
+            }
         }
 
         /* 主容器 */
@@ -95,7 +105,8 @@
             max-width: 800px;
             width: 100%;
             margin: 0 auto;
-            padding: 15px; /* 减少内边距 */
+            padding: 15px;
+            /* 减少内边距 */
             flex: 1;
             display: flex;
             flex-direction: column;
@@ -105,20 +116,24 @@
         /* 页面标题 - 减少整体高度 */
         header {
             text-align: center;
-            margin: 15px 0 25px; /* 大幅减少上下间距 */
+            margin: 15px 0 25px;
+            /* 大幅减少上下间距 */
             width: 100%;
             position: relative;
         }
 
         .title-container {
-            margin-bottom: 8px; /* 减少底部间距 */
+            margin-bottom: 8px;
+            /* 减少底部间距 */
             position: relative;
             display: inline-block;
         }
 
         .title-line:first-child {
-            font-size: 1.3rem; /* 减小字体 */
-            margin-bottom: 5px; /* 减少底部间距 */
+            font-size: 1.3rem;
+            /* 减小字体 */
+            margin-bottom: 5px;
+            /* 减少底部间距 */
             font-weight: 700;
             background: linear-gradient(90deg, #ff6666, #ffffff);
             -webkit-background-clip: text;
@@ -128,7 +143,8 @@
         }
 
         .title-line:last-child {
-            font-size: 2.2rem; /* 减小字体 */
+            font-size: 2.2rem;
+            /* 减小字体 */
             background: linear-gradient(135deg, var(--accent), #ccb0ff);
             -webkit-background-clip: text;
             background-clip: text;
@@ -143,10 +159,12 @@
         .title-line:last-child::after {
             content: '';
             position: absolute;
-            bottom: -6px; /* 减少距离 */
+            bottom: -6px;
+            /* 减少距离 */
             left: 25%;
             width: 50%;
-            height: 2px; /* 减小高度 */
+            height: 2px;
+            /* 减小高度 */
             background: linear-gradient(90deg, transparent, var(--accent), transparent);
             border-radius: 3px;
         }
@@ -156,8 +174,10 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 12px; /* 减少按钮之间的间距 */
-            margin-bottom: 25px; /* 减少底部距离 */
+            gap: 12px;
+            /* 减少按钮之间的间距 */
+            margin-bottom: 25px;
+            /* 减少底部距离 */
             width: 100%;
             max-width: 500px;
         }
@@ -168,15 +188,17 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: var(--border-radius);
-            padding: 14px 20px; /* 减少内边距 */
+            padding: 14px 20px;
+            /* 减少内边距 */
             text-decoration: none;
             color: var(--text-primary);
-            font-size: 1.1rem; /* 减小字体 */
+            font-size: 1.1rem;
+            /* 减小字体 */
             font-weight: 600;
             transition: var(--transition);
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
             position: relative;
             overflow: hidden;
             box-shadow: var(--shadow);
@@ -199,7 +221,8 @@
         }
 
         .nav-link:hover {
-            transform: translateY(-3px) scale(1.01); /* 减小悬停效果 */
+            transform: translateY(-3px) scale(1.01);
+            /* 减小悬停效果 */
             box-shadow: var(--shadow-hover), 0 0 20px var(--accent-glow);
             border-color: var(--accent);
         }
@@ -209,9 +232,11 @@
         }
 
         .nav-link .icon {
-            margin-right: 12px; /* 减少图标与文字间距 */
-            font-size: 1.4rem; /* 减小图标 */
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.25));
+            margin-right: 12px;
+            /* 减少图标与文字间距 */
+            font-size: 1.4rem;
+            /* 减小图标 */
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
             color: var(--accent);
             transition: color 0.3s ease;
         }
@@ -222,20 +247,52 @@
         }
 
         /* 每个导航图标颜色区分 */
-        .nav-link:nth-child(1) .icon { color: #a97fff; }
-        .nav-link:nth-child(2) .icon { color: #8aa6f5; }
-        .nav-link:nth-child(3) .icon { color: #788bff; }
-        .nav-link:nth-child(4) .icon { color: #a06bff; }
-        .nav-link:nth-child(5) .icon { color: #c08bff; }
+        .nav-link:nth-child(1) .icon {
+            color: #a97fff;
+        }
+
+        .nav-link:nth-child(2) .icon {
+            color: #8aa6f5;
+        }
+
+        .nav-link:nth-child(3) .icon {
+            color: #788bff;
+        }
+
+        .nav-link:nth-child(4) .icon {
+            color: #a06bff;
+        }
+
+        .nav-link:nth-child(5) .icon {
+            color: #c08bff;
+        }
+
+        /* 状态标签样式 */
+        .status-tag {
+            font-size: 0.8rem;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-weight: 500;
+        }
+        .status-tag.available {
+            background: rgba(72, 221, 176, 0.2);
+            color: var(--success);
+        }
+        .status-tag.maintenance {
+            background: rgba(249, 194, 94, 0.2);
+            color: var(--warning);
+        }
 
         /* 底部系统状态栏 - 更紧凑 */
         .status-bar {
             background: var(--bg-secondary);
             backdrop-filter: blur(10px);
             border-radius: var(--border-radius);
-            padding: 15px; /* 减少内边距 */
+            padding: 15px;
+            /* 减少内边距 */
             margin-top: auto;
-            margin-bottom: 15px; /* 增加底部小间距 */
+            margin-bottom: 15px;
+            /* 增加底部小间距 */
             box-shadow: var(--shadow);
             border: 1px solid rgba(255, 255, 255, 0.15);
             width: 100%;
@@ -254,15 +311,18 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 3px; /* 减小高度 */
+            height: 3px;
+            /* 减小高度 */
             background: linear-gradient(90deg, var(--accent), #ccb0ff);
             box-shadow: 0 0 10px var(--accent-glow);
         }
 
         .status-title {
             text-align: center;
-            margin-bottom: 12px; /* 减少底部间距 */
-            font-size: 1.1rem; /* 减小字体 */
+            margin-bottom: 12px;
+            /* 减少底部间距 */
+            font-size: 1.1rem;
+            /* 减小字体 */
             color: var(--text-primary);
             font-weight: 600;
             width: 100%;
@@ -272,35 +332,42 @@
         }
 
         .status-title i {
-            margin: 0 10px; /* 减少图标间距 */
+            margin: 0 10px;
+            /* 减少图标间距 */
             color: var(--accent);
-            font-size: 1rem; /* 减小图标 */
+            font-size: 1rem;
+            /* 减小图标 */
         }
 
         .status-item {
-            margin-bottom: 12px; /* 减少项目间距 */
+            margin-bottom: 12px;
+            /* 减少项目间距 */
             width: 100%;
         }
 
         .status-item:last-child {
-            margin-bottom: 0; /* 最后一项无间距 */
+            margin-bottom: 0;
+            /* 最后一项无间距 */
         }
 
         .status-label {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 6px; /* 减少标签与进度条间距 */
-            font-size: 0.9rem; /* 减小字体 */
+            margin-bottom: 6px;
+            /* 减少标签与进度条间距 */
+            font-size: 0.9rem;
+            /* 减小字体 */
             width: 100%;
             font-weight: 500;
         }
 
         .progress-container {
-            height: 8px; /* 减小进度条高度 */
+            height: 8px;
+            /* 减小进度条高度 */
             background: rgba(255, 255, 255, 0.12);
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.25);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.25);
             width: 100%;
             position: relative;
         }
@@ -321,14 +388,20 @@
             left: 0;
             bottom: 0;
             right: 0;
-            background-image: linear-gradient(-45deg, rgba(255,255,255,0.2) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.2) 75%, transparent 75%, transparent);
-            background-size: 8px 8px; /* 减小图案尺寸 */
+            background-image: linear-gradient(-45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);
+            background-size: 8px 8px;
+            /* 减小图案尺寸 */
             animation: move 1s linear infinite;
         }
 
         @keyframes move {
-            0% { background-position: 0 0; }
-            100% { background-position: 8px 0; }
+            0% {
+                background-position: 0 0;
+            }
+
+            100% {
+                background-position: 8px 0;
+            }
         }
 
         /* 浮动装饰元素 */
@@ -351,9 +424,17 @@
         }
 
         @keyframes float {
-            0% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-30px) rotate(180deg); }
-            100% { transform: translateY(0) rotate(360deg); }
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-30px) rotate(180deg);
+            }
+
+            100% {
+                transform: translateY(0) rotate(360deg);
+            }
         }
 
         /* 粒子效果 */
@@ -375,88 +456,154 @@
         }
 
         @keyframes particle-float {
-            0% { transform: translateY(100vh) translateX(0); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-100px) translateX(100px); opacity: 0; }
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-100px) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        /* 底部空白信息填充区 */
+        .empty-fill {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 15px;
+        }
+        
+        .empty-line {
+            height: 20px;
+            width: 100%;
+            margin-bottom: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
         }
 
         /* 响应式适配 - 保持紧凑 */
         @media (max-width: 768px) {
-            .container { padding: 10px; }
-            
-            .title-line:last-child { font-size: 1.8rem; }
-            .title-line:first-child { font-size: 1.1rem; }
-            
-            .nav-link { 
-                padding: 12px 15px; 
-                font-size: 1rem; 
+            .container {
+                padding: 10px;
+            }
+
+            .title-line:last-child {
+                font-size: 1.8rem;
+            }
+
+            .title-line:first-child {
+                font-size: 1.1rem;
+            }
+
+            .nav-link {
+                padding: 12px 15px;
+                font-size: 1rem;
             }
         }
 
         @media (max-width: 480px) {
-            .title-line:last-child { font-size: 1.6rem; }
-            .title-line:first-child { font-size: 1rem; }
-            
-            .nav-link { 
-                padding: 10px; 
-                font-size: 0.95rem; 
+            .title-line:last-child {
+                font-size: 1.6rem;
+            }
+
+            .title-line:first-child {
+                font-size: 1rem;
+            }
+
+            .nav-link {
+                padding: 10px;
+                font-size: 0.95rem;
+            }
+
+            .status-bar {
+                padding: 12px 10px;
             }
             
-            .status-bar { padding: 12px 10px; }
+            .empty-line {
+                height: 16px;
+                margin-bottom: 8px;
+            }
         }
     </style>
 </head>
+
 <body>
     <div class="floating-elements">
-        <div class="floating-element" style="width: 120px; height: 120px; top: 10%; left: 5%; animation-duration: 25s;"></div>
-        <div class="floating-element" style="width: 180px; height: 180px; top: 60%; right: 10%; animation-duration: 30s;"></div>
-        <div class="floating-element" style="width: 100px; height: 100px; bottom: 20%; left: 15%; animation-duration: 22s;"></div>
+        <div class="floating-element" style="width: 120px; height: 120px; top: 10%; left: 5%; animation-duration: 25s;">
+        </div>
+        <div class="floating-element"
+            style="width: 180px; height: 180px; top: 60%; right: 10%; animation-duration: 30s;"></div>
+        <div class="floating-element"
+            style="width: 100px; height: 100px; bottom: 20%; left: 15%; animation-duration: 22s;"></div>
     </div>
 
     <div class="particles" id="particles-container"></div>
 
     <div class="alert-bar">
-        <i class="fas fa-exclamation-circle"></i> 通道进不去请更换浏览器，如无法观看，支付成功重新进入网址点击已购观看
+        <i class="fas fa-exclamation-circle"></i> 通道进不去请更换浏览器，如无法观看请尝试刷新页面
     </div>
-    
+
     <div class="container">
         <header>
             <div class="title-container">
                 <div class="title-line">收藏网址 永不失联</div>
-                <div class="title-line">XXXX</div>
+                <div class="title-line">vx69.com</div>
             </div>
         </header>
-        
+
         <div class="nav-container">
             <a href="http://bd17q111.bd01.water-hf.com/a/637116?F3ZN" class="nav-link" target="_blank">
-                <span class="icon"><i class="fas fa-film"></i></span>
-                观影通道①
+                <div style="display: flex; align-items: center;">
+                    <span class="icon"><i class="fas fa-film"></i></span>
+                    观影通道①
+                </div>
+                <span class="status-tag available">可用</span>
             </a>
             <a href="http://yunshangjianshen.cn/a/602259?sr23" class="nav-link" target="_blank">
-                <span class="icon"><i class="fas fa-tv"></i></span>
-                观影通道②
+                <div style="display: flex; align-items: center;">
+                    <span class="icon"><i class="fas fa-tv"></i></span>
+                    观影通道②
+                </div>
+                <span class="status-tag available">可用</span>
             </a>
             <a href="http://zqijspsg.s.ccshbxfwgl.org.cn/s/15GfdC" class="nav-link" target="_blank">
-                <span class="icon"><i class="fas fa-video"></i></span>
-                观影通道③
+                <div style="display: flex; align-items: center;">
+                    <span class="icon"><i class="fas fa-video"></i></span>
+                    观影通道③
+                </div>
+                <span class="status-tag available">可用</span>
             </a>
             <a href="http://amrympun.u.dyqclyx.com/s/15G6eN" class="nav-link" target="_blank">
-                <span class="icon"><i class="fas fa-star"></i></span>
-                观影通道④
+                <div style="display: flex; align-items: center;">
+                    <span class="icon"><i class="fas fa-star"></i></span>
+                    观影通道④
+                </div>
+                <span class="status-tag available">可用</span>
             </a>
             <a href="http://fkaf.u.hbbwy.cn/s/15GmaK" class="nav-link" target="_blank">
-                <span class="icon"><i class="fas fa-crown"></i></span>
-                观影通道⑤
+                <div style="display: flex; align-items: center;">
+                    <span class="icon"><i class="fas fa-crown"></i></span>
+                    观影通道⑤
+                </div>
+                <span class="status-tag available">可用</span>
             </a>
         </div>
     </div>
-    
+
     <div class="status-bar">
         <div class="status-title">
             <i class="fas fa-chart-line"></i> 系统状态 <i class="fas fa-chart-line"></i>
         </div>
-        
+
         <div class="status-item">
             <div class="status-label">
                 <span><i class="fas fa-users"></i> 在线人数</span>
@@ -466,7 +613,7 @@
                 <div class="progress-bar" id="online-progress" style="width: 0%"></div>
             </div>
         </div>
-        
+
         <div class="status-item">
             <div class="status-label">
                 <span><i class="fas fa-server"></i> 系统负载</span>
@@ -478,6 +625,12 @@
         </div>
     </div>
 
+    <!-- 底部空白信息填充区 -->
+    <div class="empty-fill">
+        <div class="empty-line"></div>
+        <div class="empty-line"></div>
+    </div>
+
     <script>
         // 根据当前时间获取负载和在线人数的百分比范围
         function getPercentageRangeByTime() {
@@ -485,12 +638,12 @@
             const hours = now.getHours();
             const minutes = now.getMinutes();
             const seconds = now.getSeconds();
-            
+
             // 精确到秒的时间计算
             const timeOfDay = hours + minutes / 60 + seconds / 3600;
-            
+
             let min, max;
-            
+
             if (timeOfDay >= 6 && timeOfDay < 24) {
                 // 早上6点到午夜24点：5%到85%逐渐增加，范围±5%
                 const percentage = 5 + (timeOfDay - 6) * (80 / 18);
@@ -500,48 +653,49 @@
                 // 午夜0点到凌晨1点：80%到95%
                 min = 80;
                 max = 95;
-            } else { 
+            } else {
                 // 凌晨1点到6点：90%下降到5%，范围±5%
                 const percentage = 90 - (timeOfDay - 1) * (85 / 5);
                 min = Math.max(5, percentage - 5);
                 max = Math.min(90, percentage + 5);
             }
-            
+
             return { min, max };
         }
-        
+
         // 生成指定范围内的随机小数，保留两位小数
         function getRandomFloat(min, max) {
             return parseFloat((Math.random() * (max - min) + min).toFixed(2));
         }
-        
+
         // 更新系统状态
         function updateStatus() {
             const { min, max } = getPercentageRangeByTime();
-            
+
             // 生成在线人数百分比
             const onlinePercentage = getRandomFloat(min, max);
-            
+
             // 生成系统负载百分比（与在线人数接近）
             const loadMin = Math.max(min, onlinePercentage - 0.25);
             const loadMax = Math.min(max, onlinePercentage + 0.25);
             const loadPercentage = getRandomFloat(loadMin, loadMax);
-            
+
             // 计算在线人数（最大50000人）
             const maxUsers = 50000;
             const onlineCount = Math.floor((onlinePercentage / 100) * maxUsers);
-            
+
             // 更新DOM
             document.getElementById('online-count').textContent = onlineCount.toLocaleString();
             document.getElementById('online-progress').style.width = onlinePercentage + '%';
             document.getElementById('load-percent').textContent = loadPercentage + '%';
             document.getElementById('load-progress').style.width = loadPercentage + '%';
         }
-        
+
         // 创建粒子效果
         function createParticles() {
             const container = document.getElementById('particles-container');
-            for (let i = 0; i < 30; i++) {
+            const particleCount = window.innerWidth <= 480 ? 15 : 30;
+            for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
                 particle.classList.add('particle');
                 const size = Math.random() * 4 + 1;
@@ -553,15 +707,15 @@
                 container.appendChild(particle);
             }
         }
-        
+
         // 页面加载时初始化
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             updateStatus();
             createParticles();
-            
+
             // 每30秒更新一次状态
             setInterval(updateStatus, 30 * 1000);
-            
+
             // 添加更多浮动元素
             const floatingContainer = document.querySelector('.floating-elements');
             for (let i = 0; i < 5; i++) {
@@ -578,5 +732,5 @@
         });
     </script>
 </body>
+
 </html>
-    
