@@ -19,10 +19,10 @@
             --accent-glow: rgba(169, 127, 255, 0.6);
             --warning: #f9c25e;
             --success: #48ddb0;
-            --border-radius: 16px;
+            --border-radius: 12px; /* 略微减小圆角 */
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            --shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
-            --shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.35);
+            --shadow: 0 6px 20px rgba(0, 0, 0, 0.18); /* 减小阴影 */
+            --shadow-hover: 0 10px 30px rgba(0, 0, 0, 0.35);
         }
 
         * {
@@ -59,13 +59,13 @@
             z-index: -1;
         }
 
-        /* 顶部警告栏 */
+        /* 顶部警告栏 - 高度减小 */
         .alert-bar {
             background: linear-gradient(90deg, var(--warning), #fed779);
             color: #1e293b;
             text-align: center;
-            padding: 12px;
-            font-size: 14px;
+            padding: 8px 12px; /* 减少内边距 */
+            font-size: 13px; /* 减小字体 */
             font-weight: 600;
             width: 100%;
             box-shadow: 0 4px 12px rgba(249, 194, 94, 0.4);
@@ -95,30 +95,30 @@
             max-width: 800px;
             width: 100%;
             margin: 0 auto;
-            padding: 20px;
+            padding: 15px; /* 减少内边距 */
             flex: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        /* 页面标题 */
+        /* 页面标题 - 减少整体高度 */
         header {
             text-align: center;
-            margin: 30px 0 50px;
+            margin: 15px 0 25px; /* 大幅减少上下间距 */
             width: 100%;
             position: relative;
         }
 
         .title-container {
-            margin-bottom: 15px;
+            margin-bottom: 8px; /* 减少底部间距 */
             position: relative;
             display: inline-block;
         }
 
         .title-line:first-child {
-            font-size: 1.6rem;
-            margin-bottom: 10px;
+            font-size: 1.3rem; /* 减小字体 */
+            margin-bottom: 5px; /* 减少底部间距 */
             font-weight: 700;
             background: linear-gradient(90deg, #ff6666, #ffffff);
             -webkit-background-clip: text;
@@ -128,7 +128,7 @@
         }
 
         .title-line:last-child {
-            font-size: 3rem;
+            font-size: 2.2rem; /* 减小字体 */
             background: linear-gradient(135deg, var(--accent), #ccb0ff);
             -webkit-background-clip: text;
             background-clip: text;
@@ -143,39 +143,38 @@
         .title-line:last-child::after {
             content: '';
             position: absolute;
-            bottom: -10px;
+            bottom: -6px; /* 减少距离 */
             left: 25%;
             width: 50%;
-            height: 3px;
+            height: 2px; /* 减小高度 */
             background: linear-gradient(90deg, transparent, var(--accent), transparent);
             border-radius: 3px;
         }
 
-        /* 导航容器 */
+        /* 导航容器 - 减少间距 */
         .nav-container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 20px;
-            margin-bottom: 50px;
+            gap: 12px; /* 减少按钮之间的间距 */
+            margin-bottom: 25px; /* 减少底部距离 */
             width: 100%;
             max-width: 500px;
         }
 
-        /* 导航按钮（带介绍文字） */
+        /* 导航按钮 - 更紧凑的设计 */
         .nav-link {
             background: var(--bg-secondary);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: var(--border-radius);
-            padding: 22px 30px;
+            padding: 14px 20px; /* 减少内边距 */
             text-decoration: none;
             color: var(--text-primary);
-            font-size: 1.3rem;
+            font-size: 1.1rem; /* 减小字体 */
             font-weight: 600;
             transition: var(--transition);
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
             position: relative;
@@ -184,20 +183,6 @@
             width: 100%;
             text-align: center;
             z-index: 1;
-        }
-
-        .nav-link .main-content {
-            display: flex;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-
-        .nav-description {
-            font-size: 0.85rem;
-            color: var(--text-tertiary);
-            max-width: 90%;
-            line-height: 1.4;
-            transition: color 0.3s ease;
         }
 
         .nav-link::before {
@@ -214,7 +199,7 @@
         }
 
         .nav-link:hover {
-            transform: translateY(-5px) scale(1.02);
+            transform: translateY(-3px) scale(1.01); /* 减小悬停效果 */
             box-shadow: var(--shadow-hover), 0 0 20px var(--accent-glow);
             border-color: var(--accent);
         }
@@ -223,13 +208,9 @@
             opacity: 1;
         }
 
-        .nav-link:hover .nav-description {
-            color: var(--text-secondary);
-        }
-
         .nav-link .icon {
-            margin-right: 15px;
-            font-size: 1.6rem;
+            margin-right: 12px; /* 减少图标与文字间距 */
+            font-size: 1.4rem; /* 减小图标 */
             filter: drop-shadow(0 2px 4px rgba(0,0,0,0.25));
             color: var(--accent);
             transition: color 0.3s ease;
@@ -247,13 +228,14 @@
         .nav-link:nth-child(4) .icon { color: #a06bff; }
         .nav-link:nth-child(5) .icon { color: #c08bff; }
 
-        /* 底部系统状态栏 */
+        /* 底部系统状态栏 - 更紧凑 */
         .status-bar {
             background: var(--bg-secondary);
             backdrop-filter: blur(10px);
             border-radius: var(--border-radius);
-            padding: 25px;
+            padding: 15px; /* 减少内边距 */
             margin-top: auto;
+            margin-bottom: 15px; /* 增加底部小间距 */
             box-shadow: var(--shadow);
             border: 1px solid rgba(255, 255, 255, 0.15);
             width: 100%;
@@ -272,15 +254,15 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 4px;
+            height: 3px; /* 减小高度 */
             background: linear-gradient(90deg, var(--accent), #ccb0ff);
             box-shadow: 0 0 10px var(--accent-glow);
         }
 
         .status-title {
             text-align: center;
-            margin-bottom: 20px;
-            font-size: 1.4rem;
+            margin-bottom: 12px; /* 减少底部间距 */
+            font-size: 1.1rem; /* 减小字体 */
             color: var(--text-primary);
             font-weight: 600;
             width: 100%;
@@ -290,27 +272,31 @@
         }
 
         .status-title i {
-            margin: 0 15px;
+            margin: 0 10px; /* 减少图标间距 */
             color: var(--accent);
-            font-size: 1.2rem;
+            font-size: 1rem; /* 减小图标 */
         }
 
         .status-item {
-            margin-bottom: 20px;
+            margin-bottom: 12px; /* 减少项目间距 */
             width: 100%;
+        }
+
+        .status-item:last-child {
+            margin-bottom: 0; /* 最后一项无间距 */
         }
 
         .status-label {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 10px;
-            font-size: 1rem;
+            margin-bottom: 6px; /* 减少标签与进度条间距 */
+            font-size: 0.9rem; /* 减小字体 */
             width: 100%;
             font-weight: 500;
         }
 
         .progress-container {
-            height: 10px;
+            height: 8px; /* 减小进度条高度 */
             background: rgba(255, 255, 255, 0.12);
             border-radius: 10px;
             overflow: hidden;
@@ -336,13 +322,13 @@
             bottom: 0;
             right: 0;
             background-image: linear-gradient(-45deg, rgba(255,255,255,0.2) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.2) 75%, transparent 75%, transparent);
-            background-size: 10px 10px;
+            background-size: 8px 8px; /* 减小图案尺寸 */
             animation: move 1s linear infinite;
         }
 
         @keyframes move {
             0% { background-position: 0 0; }
-            100% { background-position: 10px 0; }
+            100% { background-position: 8px 0; }
         }
 
         /* 浮动装饰元素 */
@@ -395,35 +381,29 @@
             100% { transform: translateY(-100px) translateX(100px); opacity: 0; }
         }
 
-        /* 响应式适配 */
+        /* 响应式适配 - 保持紧凑 */
         @media (max-width: 768px) {
-            .container { padding: 15px; }
+            .container { padding: 10px; }
             
-            .title-line:last-child { font-size: 2.4rem; }
-            .title-line:first-child { font-size: 1.4rem; }
+            .title-line:last-child { font-size: 1.8rem; }
+            .title-line:first-child { font-size: 1.1rem; }
             
             .nav-link { 
-                padding: 18px 20px; 
-                font-size: 1.1rem; 
+                padding: 12px 15px; 
+                font-size: 1rem; 
             }
-            
-            .nav-description { font-size: 0.8rem; }
-            
-            .status-bar, .nav-container { max-width: 100%; }
         }
 
         @media (max-width: 480px) {
-            .title-line:last-child { font-size: 2rem; }
-            .title-line:first-child { font-size: 1.2rem; }
+            .title-line:last-child { font-size: 1.6rem; }
+            .title-line:first-child { font-size: 1rem; }
             
             .nav-link { 
-                padding: 16px; 
-                font-size: 1rem; 
+                padding: 10px; 
+                font-size: 0.95rem; 
             }
             
-            .nav-description { font-size: 0.75rem; }
-            
-            .status-bar { padding: 20px 15px; }
+            .status-bar { padding: 12px 10px; }
         }
     </style>
 </head>
@@ -444,46 +424,30 @@
         <header>
             <div class="title-container">
                 <div class="title-line">收藏网址 永不失联</div>
-                <div class="title-line">vx69.com</div>
+                <div class="title-line">XXXX</div>
             </div>
         </header>
         
         <div class="nav-container">
-            <!-- 每个链接都添加了 target="_blank" 属性，实现在新页面打开 -->
-            <a href="http://bd17q111.bd01.water-hf.com/a/637116?F3ZN" class="nav-link" target="_blank">
-                <div class="main-content">
-                    <span class="icon"><i class="fas fa-film"></i></span>
-                    观影通道①
-                </div>
-                <span class="nav-description">高清资源，流畅播放，推荐首选通道</span>
+            <a href="#" class="nav-link" target="_blank">
+                <span class="icon"><i class="fas fa-film"></i></span>
+                观影通道①
             </a>
-            <a href="http://yunshangjianshen.cn/a/602259?sr23" class="nav-link" target="_blank">
-                <div class="main-content">
-                    <span class="icon"><i class="fas fa-tv"></i></span>
-                    观影通道②
-                </div>
-                <span class="nav-description">备用通道，支持多清晰度切换</span>
+            <a href="#" class="nav-link" target="_blank">
+                <span class="icon"><i class="fas fa-tv"></i></span>
+                观影通道②
             </a>
-            <a href="http://zqijspsg.s.ccshbxfwgl.org.cn/s/15GfdC" class="nav-link" target="_blank">
-                <div class="main-content">
-                    <span class="icon"><i class="fas fa-video"></i></span>
-                    观影通道③
-                </div>
-                <span class="nav-description">极速加载，适合网络条件一般的用户</span>
+            <a href="#" class="nav-link" target="_blank">
+                <span class="icon"><i class="fas fa-video"></i></span>
+                观影通道③
             </a>
-            <a href="http://amrympun.u.dyqclyx.com/s/15G6eN" class="nav-link" target="_blank">
-                <div class="main-content">
-                    <span class="icon"><i class="fas fa-star"></i></span>
-                    观影通道④
-                </div>
-                <span class="nav-description">海外节点，适合特定区域用户访问</span>
+            <a href="#" class="nav-link" target="_blank">
+                <span class="icon"><i class="fas fa-star"></i></span>
+                观影通道④
             </a>
-            <a href="http://fkaf.u.hbbwy.cn/s/15GmaK" class="nav-link" target="_blank">
-                <div class="main-content">
-                    <span class="icon"><i class="fas fa-crown"></i></span>
-                    观影通道⑤
-                </div>
-                <span class="nav-description">会员专享，无广告干扰的观影体验</span>
+            <a href="#" class="nav-link" target="_blank">
+                <span class="icon"><i class="fas fa-crown"></i></span>
+                观影通道⑤
             </a>
         </div>
     </div>
