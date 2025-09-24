@@ -4,27 +4,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>vx69</title>
+    <title>欢迎回家</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* 仅保留暗色模式颜色配置 */
         :root {
-            /* 整体亮度提升10%的颜色配置 */
             --bg-primary: #1a2232;
             --bg-secondary: rgba(36, 46, 68, 0.85);
             --bg-accent: rgba(50, 60, 84, 0.65);
             --text-primary: #f5f8fc;
             --text-secondary: #b3c0d6;
             --text-tertiary: rgba(179, 192, 214, 0.75);
+            /* 统一的灰色小字颜色 */
+            --tab-subtext-gray: #8a94a6;
             --accent: #a97fff;
             --accent-hover: #c29bfe;
             --accent-glow: rgba(169, 127, 255, 0.6);
             --warning: #f9c25e;
             --success: #48ddb0;
+            
+            /* 通道颜色（仅用于图标和主文字） */
+            --channel1-color: #a97fff;
+            --channel2-color: #6fc4ff;
+            --channel3-color: #78e08f;
+            --channel4-color: #ffb677;
+            --channel5-color: #ff8fa3;
+            
             --border-radius: 12px;
-            /* 略微减小圆角 */
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             --shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
-            /* 减小阴影 */
             --shadow-hover: 0 10px 30px rgba(0, 0, 0, 0.35);
         }
 
@@ -62,15 +70,13 @@
             z-index: -1;
         }
 
-        /* 顶部警告栏 - 高度减小 */
+        /* 顶部警告栏 */
         .alert-bar {
             background: linear-gradient(90deg, var(--warning), #fed779);
             color: #1e293b;
             text-align: center;
             padding: 8px 12px;
-            /* 减少内边距 */
             font-size: 13px;
-            /* 减小字体 */
             font-weight: 600;
             width: 100%;
             box-shadow: 0 4px 12px rgba(249, 194, 94, 0.4);
@@ -91,13 +97,8 @@
         }
 
         @keyframes shimmer {
-            0% {
-                left: -100%;
-            }
-
-            100% {
-                left: 100%;
-            }
+            0% { left: -100%; }
+            100% { left: 100%; }
         }
 
         /* 主容器 */
@@ -106,34 +107,29 @@
             width: 100%;
             margin: 0 auto;
             padding: 15px;
-            /* 减少内边距 */
             flex: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        /* 页面标题 - 减少整体高度 */
+        /* 页面标题 */
         header {
             text-align: center;
             margin: 15px 0 25px;
-            /* 大幅减少上下间距 */
             width: 100%;
             position: relative;
         }
 
         .title-container {
             margin-bottom: 8px;
-            /* 减少底部间距 */
             position: relative;
             display: inline-block;
         }
 
         .title-line:first-child {
             font-size: 1.3rem;
-            /* 减小字体 */
             margin-bottom: 5px;
-            /* 减少底部间距 */
             font-weight: 700;
             background: linear-gradient(90deg, #ff6666, #ffffff);
             -webkit-background-clip: text;
@@ -144,7 +140,6 @@
 
         .title-line:last-child {
             font-size: 2.2rem;
-            /* 减小字体 */
             background: linear-gradient(135deg, var(--accent), #ccb0ff);
             -webkit-background-clip: text;
             background-clip: text;
@@ -160,40 +155,33 @@
             content: '';
             position: absolute;
             bottom: -6px;
-            /* 减少距离 */
             left: 25%;
             width: 50%;
             height: 2px;
-            /* 减小高度 */
             background: linear-gradient(90deg, transparent, var(--accent), transparent);
             border-radius: 3px;
         }
 
-        /* 导航容器 - 减少间距 */
+        /* 导航容器 */
         .nav-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 12px;
-            /* 减少按钮之间的间距 */
             margin-bottom: 25px;
-            /* 减少底部距离 */
             width: 100%;
             max-width: 500px;
         }
 
-        /* 导航按钮 - 更紧凑的设计 */
+        /* 导航按钮 - 支持两行文字 */
         .nav-link {
             background: var(--bg-secondary);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: var(--border-radius);
             padding: 14px 20px;
-            /* 减少内边距 */
             text-decoration: none;
-            color: var(--text-primary);
             font-size: 1.1rem;
-            /* 减小字体 */
             font-weight: 600;
             transition: var(--transition);
             display: flex;
@@ -203,7 +191,6 @@
             overflow: hidden;
             box-shadow: var(--shadow);
             width: 100%;
-            text-align: center;
             z-index: 1;
         }
 
@@ -222,49 +209,104 @@
 
         .nav-link:hover {
             transform: translateY(-3px) scale(1.01);
-            /* 减小悬停效果 */
-            box-shadow: var(--shadow-hover), 0 0 20px var(--accent-glow);
-            border-color: var(--accent);
+            box-shadow: var(--shadow-hover);
         }
 
         .nav-link:hover::before {
             opacity: 1;
         }
 
-        .nav-link .icon {
+        /* 统一所有图标的宽度和对齐方式 */
+        .icon-container {
+            width: 40px; /* 固定宽度，确保所有图标对齐 */
+            display: flex;
+            justify-content: center;
             margin-right: 12px;
-            /* 减少图标与文字间距 */
-            font-size: 1.4rem;
-            /* 减小图标 */
+        }
+
+        .nav-link .icon {
+            font-size: 1.8rem;
             filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
-            color: var(--accent);
-            transition: color 0.3s ease;
+            transition: color 0.3s ease, filter 0.3s ease;
         }
 
         .nav-link:hover .icon {
-            color: var(--accent-hover);
-            filter: drop-shadow(0 0 10px var(--accent-glow));
+            filter: drop-shadow(0 0 10px rgba(169, 127, 255, 0.6));
         }
 
-        /* 每个导航图标颜色区分 */
-        .nav-link:nth-child(1) .icon {
-            color: #a97fff;
+        /* 导航链接文本容器 - 支持两行文字 */
+        .nav-text {
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            flex-grow: 1;
         }
 
-        .nav-link:nth-child(2) .icon {
-            color: #8aa6f5;
+        .nav-main-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            line-height: 1.2;
+            transition: text-shadow 0.3s ease;
         }
 
-        .nav-link:nth-child(3) .icon {
-            color: #788bff;
+        .nav-link:hover .nav-main-text {
+            text-shadow: 0 0 8px rgba(169, 127, 255, 0.4);
         }
 
-        .nav-link:nth-child(4) .icon {
-            color: #a06bff;
+        /* 统一所有通道的小字为灰色 */
+        .nav-sub-text {
+            font-size: 0.75rem;
+            margin-top: 3px;
+            line-height: 1.2;
+            transition: color 0.3s ease;
+            color: var(--tab-subtext-gray) !important; /* 强制统一为灰色，优先级最高 */
         }
 
-        .nav-link:nth-child(5) .icon {
-            color: #c08bff;
+        /* 为每个通道设置不同的颜色（仅图标和主文字） */
+        .nav-link:nth-child(1) .icon,
+        .nav-link:nth-child(1) .nav-main-text {
+            color: var(--channel1-color);
+        }
+        .nav-link:nth-child(1):hover {
+            border-color: var(--channel1-color);
+            box-shadow: var(--shadow-hover), 0 0 20px rgba(169, 127, 255, 0.4);
+        }
+
+        .nav-link:nth-child(2) .icon,
+        .nav-link:nth-child(2) .nav-main-text {
+            color: var(--channel2-color);
+        }
+        .nav-link:nth-child(2):hover {
+            border-color: var(--channel2-color);
+            box-shadow: var(--shadow-hover), 0 0 20px rgba(111, 196, 255, 0.4);
+        }
+
+        .nav-link:nth-child(3) .icon,
+        .nav-link:nth-child(3) .nav-main-text {
+            color: var(--channel3-color);
+        }
+        .nav-link:nth-child(3):hover {
+            border-color: var(--channel3-color);
+            box-shadow: var(--shadow-hover), 0 0 20px rgba(120, 224, 143, 0.4);
+        }
+
+        .nav-link:nth-child(4) .icon,
+        .nav-link:nth-child(4) .nav-main-text {
+            color: var(--channel4-color);
+        }
+        .nav-link:nth-child(4):hover {
+            border-color: var(--channel4-color);
+            box-shadow: var(--shadow-hover), 0 0 20px rgba(255, 182, 119, 0.4);
+        }
+
+        .nav-link:nth-child(5) .icon,
+        .nav-link:nth-child(5) .nav-main-text {
+            color: var(--channel5-color);
+        }
+        .nav-link:nth-child(5):hover {
+            border-color: var(--channel5-color);
+            box-shadow: var(--shadow-hover), 0 0 20px rgba(255, 143, 163, 0.4);
         }
 
         /* 状态标签样式 */
@@ -273,6 +315,7 @@
             padding: 2px 8px;
             border-radius: 12px;
             font-weight: 500;
+            flex-shrink: 0;
         }
         .status-tag.available {
             background: rgba(72, 221, 176, 0.2);
@@ -283,16 +326,14 @@
             color: var(--warning);
         }
 
-        /* 底部系统状态栏 - 更紧凑 */
+        /* 底部系统状态栏 - 紧凑版 */
         .status-bar {
             background: var(--bg-secondary);
             backdrop-filter: blur(10px);
             border-radius: var(--border-radius);
-            padding: 15px;
-            /* 减少内边距 */
+            padding: 8px 12px;
             margin-top: auto;
             margin-bottom: 15px;
-            /* 增加底部小间距 */
             box-shadow: var(--shadow);
             border: 1px solid rgba(255, 255, 255, 0.15);
             width: 100%;
@@ -311,20 +352,17 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 3px;
-            /* 减小高度 */
+            height: 2px;
             background: linear-gradient(90deg, var(--accent), #ccb0ff);
             box-shadow: 0 0 10px var(--accent-glow);
         }
 
         .status-title {
             text-align: center;
-            margin-bottom: 12px;
-            /* 减少底部间距 */
-            font-size: 1.1rem;
-            /* 减小字体 */
+            margin-bottom: 6px;
+            font-size: 0.9rem;
             color: var(--text-primary);
-            font-weight: 600;
+            font-weight: 500;
             width: 100%;
             display: flex;
             align-items: center;
@@ -332,42 +370,35 @@
         }
 
         .status-title i {
-            margin: 0 10px;
-            /* 减少图标间距 */
+            margin: 0 6px;
             color: var(--accent);
-            font-size: 1rem;
-            /* 减小图标 */
+            font-size: 0.85rem;
         }
 
         .status-item {
-            margin-bottom: 12px;
-            /* 减少项目间距 */
+            margin-bottom: 6px;
             width: 100%;
         }
 
         .status-item:last-child {
-            margin-bottom: 0;
-            /* 最后一项无间距 */
+            margin-bottom: 2px;
         }
 
         .status-label {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 6px;
-            /* 减少标签与进度条间距 */
-            font-size: 0.9rem;
-            /* 减小字体 */
+            margin-bottom: 3px;
+            font-size: 0.8rem;
             width: 100%;
-            font-weight: 500;
+            font-weight: 400;
         }
 
         .progress-container {
-            height: 8px;
-            /* 减小进度条高度 */
+            height: 5px;
             background: rgba(255, 255, 255, 0.12);
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.25);
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25);
             width: 100%;
             position: relative;
         }
@@ -378,7 +409,7 @@
             transition: width 1s cubic-bezier(0.34, 1.56, 0.64, 1);
             background: linear-gradient(90deg, var(--accent), #ccb0ff);
             position: relative;
-            box-shadow: 0 0 10px var(--accent-glow);
+            box-shadow: 0 0 8px var(--accent-glow);
         }
 
         .progress-bar::after {
@@ -388,20 +419,14 @@
             left: 0;
             bottom: 0;
             right: 0;
-            background-image: linear-gradient(-45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);
-            background-size: 8px 8px;
-            /* 减小图案尺寸 */
+            background-image: linear-gradient(-45deg, rgba(255,255,255,0.2) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.2) 75%, transparent 75%, transparent);
+            background-size: 6px 6px;
             animation: move 1s linear infinite;
         }
 
         @keyframes move {
-            0% {
-                background-position: 0 0;
-            }
-
-            100% {
-                background-position: 8px 0;
-            }
+            0% { background-position: 0 0; }
+            100% { background-position: 6px 0; }
         }
 
         /* 浮动装饰元素 */
@@ -424,17 +449,9 @@
         }
 
         @keyframes float {
-            0% {
-                transform: translateY(0) rotate(0deg);
-            }
-
-            50% {
-                transform: translateY(-30px) rotate(180deg);
-            }
-
-            100% {
-                transform: translateY(0) rotate(360deg);
-            }
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
+            100% { transform: translateY(0) rotate(360deg); }
         }
 
         /* 粒子效果 */
@@ -456,23 +473,10 @@
         }
 
         @keyframes particle-float {
-            0% {
-                transform: translateY(100vh) translateX(0);
-                opacity: 0;
-            }
-
-            10% {
-                opacity: 1;
-            }
-
-            90% {
-                opacity: 1;
-            }
-
-            100% {
-                transform: translateY(-100px) translateX(100px);
-                opacity: 0;
-            }
+            0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) translateX(100px); opacity: 0; }
         }
 
         /* 底部空白信息填充区 */
@@ -490,60 +494,34 @@
             border-radius: 4px;
         }
 
-        /* 响应式适配 - 保持紧凑 */
+        /* 响应式适配 */
         @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-
-            .title-line:last-child {
-                font-size: 1.8rem;
-            }
-
-            .title-line:first-child {
-                font-size: 1.1rem;
-            }
-
-            .nav-link {
-                padding: 12px 15px;
-                font-size: 1rem;
-            }
+            .container { padding: 10px; }
+            .title-line:last-child { font-size: 1.8rem; }
+            .title-line:first-child { font-size: 1.1rem; }
+            .nav-link { padding: 12px 15px; }
+            .nav-main-text { font-size: 1rem; }
+            .nav-sub-text { font-size: 0.7rem; }
+            .icon-container { width: 36px; }
         }
 
         @media (max-width: 480px) {
-            .title-line:last-child {
-                font-size: 1.6rem;
-            }
-
-            .title-line:first-child {
-                font-size: 1rem;
-            }
-
-            .nav-link {
-                padding: 10px;
-                font-size: 0.95rem;
-            }
-
-            .status-bar {
-                padding: 12px 10px;
-            }
-            
-            .empty-line {
-                height: 16px;
-                margin-bottom: 8px;
-            }
+            .title-line:last-child { font-size: 1.6rem; }
+            .title-line:first-child { font-size: 1rem; }
+            .nav-link { padding: 10px; }
+            .nav-main-text { font-size: 0.95rem; }
+            .nav-sub-text { font-size: 0.65rem; }
+            .empty-line { height: 16px; margin-bottom: 8px; }
+            .icon-container { width: 32px; }
         }
     </style>
 </head>
 
 <body>
     <div class="floating-elements">
-        <div class="floating-element" style="width: 120px; height: 120px; top: 10%; left: 5%; animation-duration: 25s;">
-        </div>
-        <div class="floating-element"
-            style="width: 180px; height: 180px; top: 60%; right: 10%; animation-duration: 30s;"></div>
-        <div class="floating-element"
-            style="width: 100px; height: 100px; bottom: 20%; left: 15%; animation-duration: 22s;"></div>
+        <div class="floating-element" style="width: 120px; height: 120px; top: 10%; left: 5%; animation-duration: 25s;"></div>
+        <div class="floating-element" style="width: 180px; height: 180px; top: 60%; right: 10%; animation-duration: 30s;"></div>
+        <div class="floating-element" style="width: 100px; height: 100px; bottom: 20%; left: 15%; animation-duration: 22s;"></div>
     </div>
 
     <div class="particles" id="particles-container"></div>
@@ -556,43 +534,58 @@
         <header>
             <div class="title-container">
                 <div class="title-line">收藏网址 永不失联</div>
-                <div class="title-line">vx69.com</div>
+                <div class="title-line">欢迎回家</div>
             </div>
         </header>
 
         <div class="nav-container">
-            <a href="http://bd17q111.bd01.water-hf.com/a/637116?F3ZN" class="nav-link" target="_blank">
-                <div style="display: flex; align-items: center;">
+            <a href="#" class="nav-link" target="_blank">
+                <div class="icon-container">
                     <span class="icon"><i class="fas fa-film"></i></span>
-                    观影通道①
+                </div>
+                <div class="nav-text">
+                    <div class="nav-main-text">观影通道①</div>
+                    <div class="nav-sub-text">高清画质，速度快，适合大多数设备</div>
                 </div>
                 <span class="status-tag available">可用</span>
             </a>
-            <a href="http://yunshangjianshen.cn/a/602259?sr23" class="nav-link" target="_blank">
-                <div style="display: flex; align-items: center;">
+            <a href="#" class="nav-link" target="_blank">
+                <div class="icon-container">
                     <span class="icon"><i class="fas fa-tv"></i></span>
-                    观影通道②
+                </div>
+                <div class="nav-text">
+                    <div class="nav-main-text">观影通道②</div>
+                    <div class="nav-sub-text">备用线路，支持多清晰度切换</div>
                 </div>
                 <span class="status-tag available">可用</span>
             </a>
-            <a href="http://zqijspsg.s.ccshbxfwgl.org.cn/s/15GfdC" class="nav-link" target="_blank">
-                <div style="display: flex; align-items: center;">
+            <a href="#" class="nav-link" target="_blank">
+                <div class="icon-container">
                     <span class="icon"><i class="fas fa-video"></i></span>
-                    观影通道③
+                </div>
+                <div class="nav-text">
+                    <div class="nav-main-text">观影通道③</div>
+                    <div class="nav-sub-text">蓝光专区，适合高端设备播放</div>
                 </div>
                 <span class="status-tag available">可用</span>
             </a>
-            <a href="http://amrympun.u.dyqclyx.com/s/15G6eN" class="nav-link" target="_blank">
-                <div style="display: flex; align-items: center;">
+            <a href="#" class="nav-link" target="_blank">
+                <div class="icon-container">
                     <span class="icon"><i class="fas fa-star"></i></span>
-                    观影通道④
+                </div>
+                <div class="nav-text">
+                    <div class="nav-main-text">观影通道④</div>
+                    <div class="nav-sub-text">海外线路，适合境外用户访问</div>
                 </div>
                 <span class="status-tag available">可用</span>
             </a>
-            <a href="http://fkaf.u.hbbwy.cn/s/15GmaK" class="nav-link" target="_blank">
-                <div style="display: flex; align-items: center;">
+            <a href="#" class="nav-link" target="_blank">
+                <div class="icon-container">
                     <span class="icon"><i class="fas fa-crown"></i></span>
-                    观影通道⑤
+                </div>
+                <div class="nav-text">
+                    <div class="nav-main-text">观影通道⑤</div>
+                    <div class="nav-sub-text">VIP专享，无广告，极速加载</div>
                 </div>
                 <span class="status-tag available">可用</span>
             </a>
@@ -713,8 +706,8 @@
             updateStatus();
             createParticles();
 
-            // 每30秒更新一次状态
-            setInterval(updateStatus, 30 * 1000);
+            // 每5秒更新一次状态
+            setInterval(updateStatus, 5 * 1000);
 
             // 添加更多浮动元素
             const floatingContainer = document.querySelector('.floating-elements');
@@ -734,3 +727,4 @@
 </body>
 
 </html>
+    
