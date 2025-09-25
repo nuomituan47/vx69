@@ -23,13 +23,6 @@
             --warning: #f9c25e;
             --success: #48ddb0;
             
-            /* 通道颜色（仅用于图标和主文字） */
-            --channel1-color: #a97fff;
-            --channel2-color: #6fc4ff;
-            --channel3-color: #78e08f;
-            --channel4-color: #ffb677;
-            --channel5-color: #ff8fa3;
-            
             --border-radius: 12px;
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             --shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
@@ -231,7 +224,7 @@
         }
 
         .nav-link:hover .icon {
-            filter: drop-shadow(0 0 10px rgba(169, 127, 255, 0.6));
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.6));
         }
 
         /* 导航链接文本容器 - 支持两行文字 */
@@ -251,7 +244,7 @@
         }
 
         .nav-link:hover .nav-main-text {
-            text-shadow: 0 0 8px rgba(169, 127, 255, 0.4);
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
         }
 
         /* 统一所有通道的小字为灰色 */
@@ -261,52 +254,6 @@
             line-height: 1.2;
             transition: color 0.3s ease;
             color: var(--tab-subtext-gray) !important; /* 强制统一为灰色，优先级最高 */
-        }
-
-        /* 为每个通道设置不同的颜色（仅图标和主文字） */
-        .nav-link:nth-child(1) .icon,
-        .nav-link:nth-child(1) .nav-main-text {
-            color: var(--channel1-color);
-        }
-        .nav-link:nth-child(1):hover {
-            border-color: var(--channel1-color);
-            box-shadow: var(--shadow-hover), 0 0 20px rgba(169, 127, 255, 0.4);
-        }
-
-        .nav-link:nth-child(2) .icon,
-        .nav-link:nth-child(2) .nav-main-text {
-            color: var(--channel2-color);
-        }
-        .nav-link:nth-child(2):hover {
-            border-color: var(--channel2-color);
-            box-shadow: var(--shadow-hover), 0 0 20px rgba(111, 196, 255, 0.4);
-        }
-
-        .nav-link:nth-child(3) .icon,
-        .nav-link:nth-child(3) .nav-main-text {
-            color: var(--channel3-color);
-        }
-        .nav-link:nth-child(3):hover {
-            border-color: var(--channel3-color);
-            box-shadow: var(--shadow-hover), 0 0 20px rgba(120, 224, 143, 0.4);
-        }
-
-        .nav-link:nth-child(4) .icon,
-        .nav-link:nth-child(4) .nav-main-text {
-            color: var(--channel4-color);
-        }
-        .nav-link:nth-child(4):hover {
-            border-color: var(--channel4-color);
-            box-shadow: var(--shadow-hover), 0 0 20px rgba(255, 182, 119, 0.4);
-        }
-
-        .nav-link:nth-child(5) .icon,
-        .nav-link:nth-child(5) .nav-main-text {
-            color: var(--channel5-color);
-        }
-        .nav-link:nth-child(5):hover {
-            border-color: var(--channel5-color);
-            box-shadow: var(--shadow-hover), 0 0 20px rgba(255, 143, 163, 0.4);
         }
 
         /* 状态标签样式 */
@@ -324,6 +271,10 @@
         .status-tag.maintenance {
             background: rgba(249, 194, 94, 0.2);
             color: var(--warning);
+        }
+        .status-tag.error {
+            background: rgba(255, 99, 132, 0.2);
+            color: #ff6384;
         }
 
         /* 底部系统状态栏 - 紧凑版 */
@@ -494,6 +445,19 @@
             border-radius: 4px;
         }
 
+        /* 加载消息样式 - 仅保留错误提示 */
+        .loading-message {
+            display: none; /* 默认隐藏加载提示 */
+        }
+
+        .loading-message.error {
+            display: block; /* 仅显示错误提示 */
+            color: #ff6384;
+            padding: 15px;
+            text-align: center;
+            width: 100%;
+        }
+
         /* 响应式适配 */
         @media (max-width: 768px) {
             .container { padding: 10px; }
@@ -534,61 +498,13 @@
         <header>
             <div class="title-container">
                 <div class="title-line">收藏网址 永不失联</div>
-                <div class="title-line">vx69.com</div>
+                <div class="title-line" id="dynamic-title">加载中...</div>
             </div>
         </header>
 
-        <div class="nav-container">
-            <a href="http://bd17q111.bd01.water-hf.com/a/637116?F3ZN" class="nav-link" target="_blank">
-                <div class="icon-container">
-                    <span class="icon"><i class="fas fa-film"></i></span>
-                </div>
-                <div class="nav-text">
-                    <div class="nav-main-text">观影通道①</div>
-                    <div class="nav-sub-text">高清画质，适合大多数设备</div>
-                </div>
-                <span class="status-tag available">可用</span>
-            </a>
-            <a href="http://yunshangjianshen.cn/a/602259?sr23" class="nav-link" target="_blank">
-                <div class="icon-container">
-                    <span class="icon"><i class="fas fa-tv"></i></span>
-                </div>
-                <div class="nav-text">
-                    <div class="nav-main-text">观影通道②</div>
-                    <div class="nav-sub-text">备用线路，支持多清晰度切换</div>
-                </div>
-                <span class="status-tag available">可用</span>
-            </a>
-            <a href="http://zqijspsg.s.ccshbxfwgl.org.cn/s/15GfdC" class="nav-link" target="_blank">
-                <div class="icon-container">
-                    <span class="icon"><i class="fas fa-video"></i></span>
-                </div>
-                <div class="nav-text">
-                    <div class="nav-main-text">观影通道③</div>
-                    <div class="nav-sub-text">蓝光专区，适合高端设备播放</div>
-                </div>
-                <span class="status-tag available">可用</span>
-            </a>
-            <a href="http://amrympun.u.dyqclyx.com/s/15G6eN" class="nav-link" target="_blank">
-                <div class="icon-container">
-                    <span class="icon"><i class="fas fa-star"></i></span>
-                </div>
-                <div class="nav-text">
-                    <div class="nav-main-text">观影通道④</div>
-                    <div class="nav-sub-text">海外线路，适合境外用户访问</div>
-                </div>
-                <span class="status-tag available">可用</span>
-            </a>
-            <a href="http://fkaf.u.hbbwy.cn/s/15GmaK" class="nav-link" target="_blank">
-                <div class="icon-container">
-                    <span class="icon"><i class="fas fa-crown"></i></span>
-                </div>
-                <div class="nav-text">
-                    <div class="nav-main-text">观影通道⑤</div>
-                    <div class="nav-sub-text">VIP专享，无广告，极速加载</div>
-                </div>
-                <span class="status-tag available">可用</span>
-            </a>
+        <!-- 动态生成的导航容器 -->
+        <div class="nav-container" id="nav-container">
+            <!-- 不再显示加载提示，将直接填充通道内容 -->
         </div>
     </div>
 
@@ -625,6 +541,207 @@
     </div>
 
     <script>
+        // 设置动态标题为当前主机名
+        function setDynamicTitle() {
+            const titleElement = document.getElementById('dynamic-title');
+            titleElement.textContent = window.location.hostname;
+        }
+
+        // 生成真正唯一的明亮颜色，使用固定排序的新颜色组
+        function getTrulyUniqueColors(count) {
+            // 新的基础颜色组 - 固定排序，更加多样化
+            const baseColors = [
+                '#FF6B8B', '#6B8BFF', '#6BFFD1', '#FFD16B', '#B86BFF',
+                '#FF8B6B', '#6BFF8B', '#8B6BFF', '#6BD1FF', '#FF6BD1',
+                '#8BFF6B', '#D16BFF', '#6BFFB8', '#FFB86B', '#6B8BFF',
+                '#FFD18B', '#8BD1FF', '#D18BFF', '#8BFFD1', '#FF6BD1',
+                '#6BFF8B', '#FF8BD1', '#8B6BFF', '#D1FF6B', '#6BD1FF'
+            ];
+            
+            // 颜色变异函数，生成与基础色相关但不同的颜色
+            function varyColor(color, variation) {
+                // 解析RGB值
+                let r = parseInt(color.substring(1, 3), 16);
+                let g = parseInt(color.substring(3, 5), 16);
+                let b = parseInt(color.substring(5, 7), 16);
+                
+                // 根据变异指数微调颜色值
+                const change = 15 * (variation + 1);
+                r = Math.max(50, Math.min(255, r + (variation % 2 === 0 ? change : -change)));
+                g = Math.max(50, Math.min(255, g + (variation % 3 === 0 ? change : -change)));
+                b = Math.max(50, Math.min(255, b + (variation % 5 === 0 ? change : -change)));
+                
+                // 转换回十六进制
+                return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase()}`;
+            }
+            
+            // 生成足够多的唯一颜色（不打乱顺序）
+            const uniqueColors = [];
+            let variation = 0;
+            
+            while (uniqueColors.length < count) {
+                // 按固定顺序使用基础颜色并添加变异
+                const baseColor = baseColors[uniqueColors.length % baseColors.length];
+                const newColor = varyColor(baseColor, variation);
+                
+                // 确保颜色真正唯一
+                if (!uniqueColors.includes(newColor)) {
+                    uniqueColors.push(newColor);
+                }
+                
+                variation++;
+            }
+            
+            return uniqueColors;
+        }
+
+        // 定义【唯一的影视相关图标库】
+        const UNIQUE_VIDEO_ICONS = [
+            'fa-film',       // 电影
+            'fa-tv',         // 电视
+            'fa-video',      // 视频
+            'fa-play-circle',// 播放圆形
+            'fa-clapperboard',// 场记板
+            'fa-circle-play',// 圆形播放
+            'fa-star',       // 星级
+            'fa-crown',      // 皇冠（VIP通道）
+            'fa-globe',      // 全球（海外通道）
+            'fa-bolt',       // 闪电（高速通道）
+            'fa-shield-alt', // 盾牌（加密通道）
+            'fa-cloud',      // 云朵（云加速）
+            'fa-rocket',     // 火箭（极速通道）
+            'fa-play',       // 播放
+            'fa-pause-circle',// 暂停圆形
+            'fa-stop-circle', // 停止圆形
+            'fa-step-forward',// 前进
+            'fa-step-backward',// 后退
+            'fa-fast-forward',// 快进
+            'fa-fast-backward',// 快退
+            'fa-volume-up',  // 音量
+            'fa-fullscreen', // 全屏
+            'fa-compress',   // 缩小
+            'fa-list',       // 列表（选集）
+            'fa-th-large',   // 网格（多视频）
+            'fa-check-circle',// 勾选（可用）
+            'fa-clock',      // 时钟（历史记录）
+            'fa-download',   // 下载（缓存通道）
+            'fa-theater-masks', // 影院图标
+            'fa-tv-retro'    // 复古电视
+        ];
+
+        // 从固定文件channels.txt加载并动态生成观影通道
+        async function loadAndGenerateChannels() {
+            const navContainer = document.getElementById('nav-container');
+            
+            try {
+                // 使用固定文件路径，不再依赖主机名
+                const filePath = 'channels.txt';
+                
+                // 读取文件内容
+                const response = await fetch(filePath);
+                if (!response.ok) {
+                    throw new Error(`无法加载文件: ${response.statusText}`);
+                }
+                
+                const content = await response.text();
+                const lines = content.split('\n');
+                const channels = [];
+                
+                // 解析文件内容
+                lines.forEach(line => {
+                    // 忽略空行
+                    if (!line.trim()) return;
+                    
+                    // 分割每行的编号和链接（处理可能的空格）
+                    const parts = line.split(',').map(part => part.trim());
+                    if (parts.length === 2) {
+                        const [id, url] = parts;
+                        channels.push({ id, url });
+                    }
+                });
+                
+                // 如果没有解析到通道
+                if (channels.length === 0) {
+                    navContainer.innerHTML = '<div class="loading-message error">未找到可用的观影通道</div>';
+                    return;
+                }
+                
+                // 为每个通道生成真正唯一的颜色（固定排序）
+                const uniqueColors = getTrulyUniqueColors(channels.length);
+                
+                // 定义通道描述
+                const descriptions = [
+                    '高清画质，适合大多数设备',
+                    '备用线路，支持多清晰度切换',
+                    '蓝光专区，适合高端设备播放',
+                    '海外线路，适合境外用户访问',
+                    'VIP专享，无广告，极速加载',
+                    '全球线路，覆盖范围广',
+                    '高速线路，加载速度快',
+                    '加密线路，隐私保护',
+                    '云加速线路，流畅播放',
+                    '极速专线，超高清体验',
+                    '缓存通道，支持离线观看',
+                    '多设备同步，跨端播放',
+                    '无广告纯净版，沉浸式体验',
+                    '1080P专区，高清首选',
+                    '4K超高清，高端设备适配'
+                ];
+                
+                // 清空容器准备生成通道
+                navContainer.innerHTML = '';
+                
+                // 生成每个通道
+                channels.forEach((channel, index) => {
+                    const { id, url } = channel;
+                    // 使用固定排序的唯一颜色
+                    const uniqueColor = uniqueColors[index];
+                    // 按顺序取唯一图标
+                    const uniqueIcon = UNIQUE_VIDEO_ICONS[index % UNIQUE_VIDEO_ICONS.length];
+                    // 循环使用描述
+                    const description = descriptions[index % descriptions.length];
+                    
+                    // 创建通道元素
+                    const linkElement = document.createElement('a');
+                    linkElement.href = url;
+                    linkElement.className = 'nav-link';
+                    linkElement.target = '_blank';
+                    linkElement.setAttribute('data-channel', id);
+                    
+                    // 设置通道内容，应用唯一颜色和图标
+                    linkElement.innerHTML = `
+                        <div class="icon-container">
+                            <span class="icon" style="color: ${uniqueColor}"><i class="fas ${uniqueIcon}"></i></span>
+                        </div>
+                        <div class="nav-text">
+                            <div class="nav-main-text" style="color: ${uniqueColor}">观影通道${id}</div>
+                            <div class="nav-sub-text">${description}</div>
+                        </div>
+                        <span class="status-tag available">可用</span>
+                    `;
+                    
+                    // 添加悬停时的发光效果
+                    const glowColor = uniqueColor + '40'; // 添加透明度
+                    linkElement.addEventListener('mouseenter', () => {
+                        linkElement.style.boxShadow = `var(--shadow-hover), 0 0 20px ${glowColor}`;
+                        linkElement.style.borderColor = uniqueColor;
+                    });
+                    
+                    linkElement.addEventListener('mouseleave', () => {
+                        linkElement.style.boxShadow = 'var(--shadow)';
+                        linkElement.style.borderColor = 'rgba(255, 255, 255, 0.15)';
+                    });
+                    
+                    // 添加到容器
+                    navContainer.appendChild(linkElement);
+                });
+                
+            } catch (error) {
+                console.error('加载通道失败:', error);
+                navContainer.innerHTML = `<div class="loading-message error">加载通道失败: ${error.message}</div>`;
+            }
+        }
+
         // 根据当前时间获取负载和在线人数的百分比范围
         function getPercentageRangeByTime() {
             const now = new Date();
@@ -703,7 +820,13 @@
 
         // 页面加载时初始化
         document.addEventListener('DOMContentLoaded', function () {
+            // 设置动态标题
+            setDynamicTitle();
+            // 加载并生成观影通道
+            loadAndGenerateChannels();
+            // 更新系统状态
             updateStatus();
+            // 创建粒子效果
             createParticles();
 
             // 每5秒更新一次状态
@@ -727,4 +850,3 @@
 </body>
 
 </html>
-    
