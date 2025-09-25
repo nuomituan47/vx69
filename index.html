@@ -82,7 +82,7 @@
                 return; // 终止后续执行
             }
             
-            // 否则进行设备类型判断并跳转
+            // 设备类型判断并跳转
             const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|HarmonyOS/i.test(userAgent);
             let targetUrl = isMobile
                 ? `templates/page.html`
@@ -95,6 +95,7 @@
                 targetUrl += (targetUrl.includes('?') ? '&' : '?') + `timestamp=${timestamp}`;
             }
 
+            // 立即跳转，不添加任何动画延迟
             window.location.href = targetUrl;
         })();
     </script>
