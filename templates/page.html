@@ -3,11 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>欢迎回家</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* 仅保留暗色模式颜色配置 */
         :root {
             --bg-primary: #1a2232;
             --bg-secondary: rgba(36, 46, 68, 0.85);
@@ -15,14 +14,12 @@
             --text-primary: #f5f8fc;
             --text-secondary: #b3c0d6;
             --text-tertiary: rgba(179, 192, 214, 0.75);
-            /* 统一的灰色小字颜色 */
             --tab-subtext-gray: #8a94a6;
             --accent: #a97fff;
             --accent-hover: #c29bfe;
             --accent-glow: rgba(169, 127, 255, 0.6);
             --warning: #f9c25e;
             --success: #48ddb0;
-            
             --border-radius: 12px;
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             --shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
@@ -49,7 +46,6 @@
             position: relative;
         }
 
-        /* 背景装饰渐变 */
         body::before {
             content: '';
             position: fixed;
@@ -63,7 +59,6 @@
             z-index: -1;
         }
 
-        /* 顶部警告栏 */
         .alert-bar {
             background: linear-gradient(90deg, var(--warning), #fed779);
             color: #1e293b;
@@ -94,7 +89,6 @@
             100% { left: 100%; }
         }
 
-        /* 主容器 */
         .container {
             max-width: 800px;
             width: 100%;
@@ -106,7 +100,6 @@
             align-items: center;
         }
 
-        /* 页面标题 */
         header {
             text-align: center;
             margin: 15px 0 25px;
@@ -155,7 +148,6 @@
             border-radius: 3px;
         }
 
-        /* 导航容器 */
         .nav-container {
             display: flex;
             flex-direction: column;
@@ -166,7 +158,6 @@
             max-width: 500px;
         }
 
-        /* 导航按钮 - 支持两行文字 */
         .nav-link {
             background: var(--bg-secondary);
             backdrop-filter: blur(10px);
@@ -209,9 +200,8 @@
             opacity: 1;
         }
 
-        /* 统一所有图标的宽度和对齐方式 */
         .icon-container {
-            width: 40px; /* 固定宽度，确保所有图标对齐 */
+            width: 40px;
             display: flex;
             justify-content: center;
             margin-right: 12px;
@@ -227,7 +217,6 @@
             filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.6));
         }
 
-        /* 导航链接文本容器 - 支持两行文字 */
         .nav-text {
             text-align: left;
             display: flex;
@@ -247,16 +236,14 @@
             text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
         }
 
-        /* 统一所有通道的小字为灰色 */
         .nav-sub-text {
             font-size: 0.75rem;
             margin-top: 3px;
             line-height: 1.2;
             transition: color 0.3s ease;
-            color: var(--tab-subtext-gray) !important; /* 强制统一为灰色，优先级最高 */
+            color: var(--tab-subtext-gray) !important;
         }
 
-        /* 状态标签样式 */
         .status-tag {
             font-size: 0.8rem;
             padding: 2px 8px;
@@ -277,7 +264,6 @@
             color: #ff6384;
         }
 
-        /* 底部系统状态栏 - 紧凑版 */
         .status-bar {
             background: var(--bg-secondary);
             backdrop-filter: blur(10px);
@@ -380,7 +366,6 @@
             100% { background-position: 6px 0; }
         }
 
-        /* 浮动装饰元素 */
         .floating-elements {
             position: fixed;
             top: 0;
@@ -405,7 +390,6 @@
             100% { transform: translateY(0) rotate(360deg); }
         }
 
-        /* 粒子效果 */
         .particles {
             position: fixed;
             top: 0;
@@ -430,7 +414,6 @@
             100% { transform: translateY(-100px) translateX(100px); opacity: 0; }
         }
 
-        /* 底部空白信息填充区 */
         .empty-fill {
             width: 100%;
             max-width: 500px;
@@ -445,20 +428,18 @@
             border-radius: 4px;
         }
 
-        /* 加载消息样式 - 仅保留错误提示 */
         .loading-message {
-            display: none; /* 默认隐藏加载提示 */
+            display: none;
         }
 
         .loading-message.error {
-            display: block; /* 仅显示错误提示 */
+            display: block;
             color: #ff6384;
             padding: 15px;
             text-align: center;
             width: 100%;
         }
 
-        /* 响应式适配 */
         @media (max-width: 768px) {
             .container { padding: 10px; }
             .title-line:last-child { font-size: 1.8rem; }
@@ -502,9 +483,7 @@
             </div>
         </header>
 
-        <!-- 动态生成的导航容器 -->
         <div class="nav-container" id="nav-container">
-            <!-- 不再显示加载提示，将直接填充通道内容 -->
         </div>
     </div>
 
@@ -534,22 +513,18 @@
         </div>
     </div>
 
-    <!-- 底部空白信息填充区 -->
     <div class="empty-fill">
         <div class="empty-line"></div>
         <div class="empty-line"></div>
     </div>
 
     <script>
-        // 设置动态标题为当前主机名
         function setDynamicTitle() {
             const titleElement = document.getElementById('dynamic-title');
             titleElement.textContent = window.location.hostname;
         }
 
-        // 生成真正唯一的明亮颜色，使用固定排序的新颜色组
         function getTrulyUniqueColors(count) {
-            // 新的基础颜色组 - 固定排序，更加多样化
             const baseColors = [
                 '#FF6B8B', '#6B8BFF', '#6BFFD1', '#FFD16B', '#B86BFF',
                 '#FF8B6B', '#6BFF8B', '#8B6BFF', '#6BD1FF', '#FF6BD1',
@@ -558,33 +533,26 @@
                 '#6BFF8B', '#FF8BD1', '#8B6BFF', '#D1FF6B', '#6BD1FF'
             ];
             
-            // 颜色变异函数，生成与基础色相关但不同的颜色
             function varyColor(color, variation) {
-                // 解析RGB值
                 let r = parseInt(color.substring(1, 3), 16);
                 let g = parseInt(color.substring(3, 5), 16);
                 let b = parseInt(color.substring(5, 7), 16);
                 
-                // 根据变异指数微调颜色值
                 const change = 15 * (variation + 1);
                 r = Math.max(50, Math.min(255, r + (variation % 2 === 0 ? change : -change)));
                 g = Math.max(50, Math.min(255, g + (variation % 3 === 0 ? change : -change)));
                 b = Math.max(50, Math.min(255, b + (variation % 5 === 0 ? change : -change)));
                 
-                // 转换回十六进制
                 return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase()}`;
             }
             
-            // 生成足够多的唯一颜色（不打乱顺序）
             const uniqueColors = [];
             let variation = 0;
             
             while (uniqueColors.length < count) {
-                // 按固定顺序使用基础颜色并添加变异
                 const baseColor = baseColors[uniqueColors.length % baseColors.length];
                 const newColor = varyColor(baseColor, variation);
                 
-                // 确保颜色真正唯一
                 if (!uniqueColors.includes(newColor)) {
                     uniqueColors.push(newColor);
                 }
@@ -595,50 +563,23 @@
             return uniqueColors;
         }
 
-        // 定义【唯一的影视相关图标库】
         const UNIQUE_VIDEO_ICONS = [
-            'fa-film',       // 电影
-            'fa-tv',         // 电视
-            'fa-video',      // 视频
-            'fa-play-circle',// 播放圆形
-            'fa-clapperboard',// 场记板
-            'fa-circle-play',// 圆形播放
-            'fa-star',       // 星级
-            'fa-crown',      // 皇冠（VIP通道）
-            'fa-globe',      // 全球（海外通道）
-            'fa-bolt',       // 闪电（高速通道）
-            'fa-shield-alt', // 盾牌（加密通道）
-            'fa-cloud',      // 云朵（云加速）
-            'fa-rocket',     // 火箭（极速通道）
-            'fa-play',       // 播放
-            'fa-pause-circle',// 暂停圆形
-            'fa-stop-circle', // 停止圆形
-            'fa-step-forward',// 前进
-            'fa-step-backward',// 后退
-            'fa-fast-forward',// 快进
-            'fa-fast-backward',// 快退
-            'fa-volume-up',  // 音量
-            'fa-fullscreen', // 全屏
-            'fa-compress',   // 缩小
-            'fa-list',       // 列表（选集）
-            'fa-th-large',   // 网格（多视频）
-            'fa-check-circle',// 勾选（可用）
-            'fa-clock',      // 时钟（历史记录）
-            'fa-download',   // 下载（缓存通道）
-            'fa-theater-masks', // 影院图标
-            'fa-tv-retro'    // 复古电视
+            'fa-film', 'fa-tv', 'fa-video', 'fa-play-circle', 'fa-clapperboard',
+            'fa-circle-play', 'fa-star', 'fa-crown', 'fa-globe', 'fa-bolt',
+            'fa-shield-alt', 'fa-cloud', 'fa-rocket', 'fa-play', 'fa-pause-circle',
+            'fa-stop-circle', 'fa-step-forward', 'fa-step-backward', 'fa-fast-forward',
+            'fa-fast-backward', 'fa-volume-up', 'fa-fullscreen', 'fa-compress', 'fa-list',
+            'fa-th-large', 'fa-check-circle', 'fa-clock', 'fa-download', 'fa-theater-masks',
+            'fa-tv-retro'
         ];
 
-        // 从固定文件channels.txt加载并动态生成观影通道
         async function loadAndGenerateChannels() {
             const navContainer = document.getElementById('nav-container');
             
             try {
-                // 使用固定文件路径，不再依赖主机名
                 const filePath = 'channels.txt';
-                
-                // 读取文件内容
                 const response = await fetch(filePath);
+                
                 if (!response.ok) {
                     throw new Error(`无法加载文件: ${response.statusText}`);
                 }
@@ -647,12 +588,9 @@
                 const lines = content.split('\n');
                 const channels = [];
                 
-                // 解析文件内容
                 lines.forEach(line => {
-                    // 忽略空行
                     if (!line.trim()) return;
                     
-                    // 分割每行的编号和链接（处理可能的空格）
                     const parts = line.split(',').map(part => part.trim());
                     if (parts.length === 2) {
                         const [id, url] = parts;
@@ -660,16 +598,13 @@
                     }
                 });
                 
-                // 如果没有解析到通道
                 if (channels.length === 0) {
                     navContainer.innerHTML = '<div class="loading-message error">未找到可用的观影通道</div>';
                     return;
                 }
                 
-                // 为每个通道生成真正唯一的颜色（固定排序）
                 const uniqueColors = getTrulyUniqueColors(channels.length);
                 
-                // 定义通道描述
                 const descriptions = [
                     '高清画质，适合大多数设备',
                     '备用线路，支持多清晰度切换',
@@ -688,27 +623,20 @@
                     '4K超高清，高端设备适配'
                 ];
                 
-                // 清空容器准备生成通道
                 navContainer.innerHTML = '';
                 
-                // 生成每个通道
                 channels.forEach((channel, index) => {
                     const { id, url } = channel;
-                    // 使用固定排序的唯一颜色
                     const uniqueColor = uniqueColors[index];
-                    // 按顺序取唯一图标
                     const uniqueIcon = UNIQUE_VIDEO_ICONS[index % UNIQUE_VIDEO_ICONS.length];
-                    // 循环使用描述
                     const description = descriptions[index % descriptions.length];
                     
-                    // 创建通道元素
                     const linkElement = document.createElement('a');
                     linkElement.href = url;
                     linkElement.className = 'nav-link';
                     linkElement.target = '_blank';
                     linkElement.setAttribute('data-channel', id);
                     
-                    // 设置通道内容，应用唯一颜色和图标
                     linkElement.innerHTML = `
                         <div class="icon-container">
                             <span class="icon" style="color: ${uniqueColor}"><i class="fas ${uniqueIcon}"></i></span>
@@ -720,8 +648,7 @@
                         <span class="status-tag available">可用</span>
                     `;
                     
-                    // 添加悬停时的发光效果
-                    const glowColor = uniqueColor + '40'; // 添加透明度
+                    const glowColor = uniqueColor + '40';
                     linkElement.addEventListener('mouseenter', () => {
                         linkElement.style.boxShadow = `var(--shadow-hover), 0 0 20px ${glowColor}`;
                         linkElement.style.borderColor = uniqueColor;
@@ -732,7 +659,6 @@
                         linkElement.style.borderColor = 'rgba(255, 255, 255, 0.15)';
                     });
                     
-                    // 添加到容器
                     navContainer.appendChild(linkElement);
                 });
                 
@@ -742,29 +668,24 @@
             }
         }
 
-        // 根据当前时间获取负载和在线人数的百分比范围
         function getPercentageRangeByTime() {
             const now = new Date();
             const hours = now.getHours();
             const minutes = now.getMinutes();
             const seconds = now.getSeconds();
 
-            // 精确到秒的时间计算
             const timeOfDay = hours + minutes / 60 + seconds / 3600;
 
             let min, max;
 
             if (timeOfDay >= 6 && timeOfDay < 24) {
-                // 早上6点到午夜24点：5%到85%逐渐增加，范围±5%
                 const percentage = 5 + (timeOfDay - 6) * (80 / 18);
                 min = Math.max(5, percentage - 5);
                 max = Math.min(85, percentage + 5);
             } else if (timeOfDay >= 0 && timeOfDay < 1) {
-                // 午夜0点到凌晨1点：80%到95%
                 min = 80;
                 max = 95;
             } else {
-                // 凌晨1点到6点：90%下降到5%，范围±5%
                 const percentage = 90 - (timeOfDay - 1) * (85 / 5);
                 min = Math.max(5, percentage - 5);
                 max = Math.min(90, percentage + 5);
@@ -773,35 +694,28 @@
             return { min, max };
         }
 
-        // 生成指定范围内的随机小数，保留两位小数
         function getRandomFloat(min, max) {
             return parseFloat((Math.random() * (max - min) + min).toFixed(2));
         }
 
-        // 更新系统状态
         function updateStatus() {
             const { min, max } = getPercentageRangeByTime();
 
-            // 生成在线人数百分比
             const onlinePercentage = getRandomFloat(min, max);
 
-            // 生成系统负载百分比（与在线人数接近）
             const loadMin = Math.max(min, onlinePercentage - 0.25);
             const loadMax = Math.min(max, onlinePercentage + 0.25);
             const loadPercentage = getRandomFloat(loadMin, loadMax);
 
-            // 计算在线人数（最大50000人）
             const maxUsers = 50000;
             const onlineCount = Math.floor((onlinePercentage / 100) * maxUsers);
 
-            // 更新DOM
             document.getElementById('online-count').textContent = onlineCount.toLocaleString();
             document.getElementById('online-progress').style.width = onlinePercentage + '%';
             document.getElementById('load-percent').textContent = loadPercentage + '%';
             document.getElementById('load-progress').style.width = loadPercentage + '%';
         }
 
-        // 创建粒子效果
         function createParticles() {
             const container = document.getElementById('particles-container');
             const particleCount = window.innerWidth <= 480 ? 15 : 30;
@@ -818,21 +732,14 @@
             }
         }
 
-        // 页面加载时初始化
         document.addEventListener('DOMContentLoaded', function () {
-            // 设置动态标题
             setDynamicTitle();
-            // 加载并生成观影通道
             loadAndGenerateChannels();
-            // 更新系统状态
             updateStatus();
-            // 创建粒子效果
             createParticles();
 
-            // 每5秒更新一次状态
             setInterval(updateStatus, 5 * 1000);
 
-            // 添加更多浮动元素
             const floatingContainer = document.querySelector('.floating-elements');
             for (let i = 0; i < 5; i++) {
                 const element = document.createElement('div');
@@ -850,3 +757,4 @@
 </body>
 
 </html>
+    
