@@ -157,7 +157,7 @@
             // 根据设备类型设置不同的跳转地址
             // 移动端使用相对路径，直接拼接时间戳参数
             const targetUrl = isMobile 
-                ? `./templates/page.html?t=${+new Date()}`  // 相对路径：当前目录下的templates文件夹
+                ? `/templates/page.html?t=${+new Date()}`  // 相对路径：当前目录下的templates文件夹
                 : "https://www.baidu.com";  // PC设备跳转地址
             
             // 执行页面跳转
