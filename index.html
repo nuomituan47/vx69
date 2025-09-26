@@ -1,1 +1,168 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>跳转中...</title><style>*{margin:0;padding:0;box-sizing:border-box}body{width:100vw;height:100vh;overflow:hidden}.browser-tip{position:fixed;inset:0;background:rgba(0,0,0,.8);display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:9999;color:#fff;padding:20px}.tip-image{position:absolute;top:20px;right:20px;width:80px;height:80px;display:flex;align-items:center;justify-content:center}.tip-image .arrow-icon{font-size:56px!important;color:#fff!important;opacity:1!important;width:auto;height:auto:auto}.browser-tip h2{font-size:24px;margin-bottom:20px;text-align:center}.browser-tip p{font-size:18px;max-width:80%;margin:0 auto;line-height:1.6;text-align:center}</style></head><body><div class="browser-tip" id="browserTip" style="display:none"><div class="tip-image"><i class="fa fa-external-link arrow-icon" aria-hidden="true"></i></div><h2>请在外部浏览器中打开</h2><p>当前页面在QQ/微信中可能无法正常显示，请点击右上角<br>选择"在浏览器中打开"</p></div><script>!function(){const e=navigator.userAgent.toLowerCase(),t=/micromessenger|qq\//.test(e);function n(){return new Promise(r=>{if(document.querySelector('link[href*="font-awesome"]'))return r();const i=document.createElement("link");i.rel="stylesheet",i.href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css",i.crossOrigin="anonymous",i.onload=function(){const o=document.querySelector(".arrow-icon");o&&(o.style.display="none",setTimeout(()=>{o.style.display="inline-block"},0)),r()},i.onerror=r,document.head.appendChild(i)})}if(t)return n().then(()=>{const r=document.getElementById("browserTip");r.style.display="flex",setTimeout(()=>{const i=document.querySelector(".arrow-icon");i&&(i.style.fontSize="56px")},100)}),void 0;const r=/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|HarmonyOS/i.test(e),i=r?`./templates/page.html?t=${+new Date()}`:"https://www.baidu.com";location.href=i}();</script></body></html>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <!-- 确保页面在移动设备上正确缩放 -->
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>跳转中...</title>
+    <style>
+        /* 重置所有元素的默认边距和内边距 */
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box; /* 盒模型计算方式：width = 内容宽度 + padding + border */
+        }
+        
+        body{
+            width:100vw;  /* 宽度占满整个视口 */
+            height:100vh; /* 高度占满整个视口 */
+            overflow:hidden; /* 禁止页面滚动 */
+        }
+        
+        /* 浏览器提示弹窗样式 */
+        .browser-tip{
+            position:fixed;
+            inset:0; /* 等同于 top:0; right:0; bottom:0; left:0; 全屏覆盖 */
+            background:rgba(0,0,0,.8); /* 半透明黑色背景 */
+            display:flex;
+            flex-direction:column; /* 子元素垂直排列 */
+            justify-content:center; /* 水平居中 */
+            align-items:center; /* 垂直居中 */
+            z-index:9999; /* 确保弹窗在最上层 */
+            color:#fff; /* 文字颜色为白色 */
+            padding:20px; /* 内边距 */
+        }
+        
+        /* 提示图标容器样式 */
+        .tip-image{
+            position:absolute; /* 绝对定位 */
+            top:20px; /* 距离顶部20px */
+            right:20px; /* 距离右侧20px */
+            width:80px; /* 宽度80px */
+            height:80px; /* 高度80px */
+            display:flex;
+            align-items:center; /* 图标垂直居中 */
+            justify-content:center; /* 图标水平居中 */
+        }
+        
+        /* 箭头图标样式 */
+        .tip-image .arrow-icon{
+            font-size:56px!important; /* 图标大小 */
+            color:#fff!important; /* 图标颜色 */
+            opacity:1!important; /* 图标不透明 */
+            width:auto;
+            height:auto;
+        }
+        
+        /* 提示标题样式 */
+        .browser-tip h2{
+            font-size:24px;
+            margin-bottom:20px; /* 底部外边距 */
+            text-align:center; /* 文字居中 */
+        }
+        
+        /* 提示内容样式 */
+        .browser-tip p{
+            font-size:18px;
+            max-width:80%; /* 最大宽度为80%视口宽度 */
+            margin:0 auto; /* 水平居中 */
+            line-height:1.6; /* 行高1.6倍 */
+            text-align:center; /* 文字居中 */
+        }
+    </style>
+</head>
+<body>
+    <!-- 浏览器提示弹窗，默认隐藏 -->
+    <div class="browser-tip" id="browserTip" style="display:none">
+        <div class="tip-image">
+            <!-- 外部链接图标，使用Font Awesome -->
+            <i class="fa fa-external-link arrow-icon" aria-hidden="true"></i>
+        </div>
+        <h2>请在外部浏览器中打开</h2>
+        <p>当前页面在QQ/微信中可能无法正常显示，请点击右上角<br>选择"在浏览器中打开"</p>
+    </div>
+
+    <script>
+        // 自执行函数，避免污染全局变量
+        !function(){
+            // 获取浏览器用户代理字符串，并转为小写便于匹配
+            const userAgent = navigator.userAgent.toLowerCase();
+            
+            // 判断是否是微信或QQ内置浏览器
+            // 匹配规则：包含"micromessenger"（微信）或"qq/"（QQ）关键字
+            const isWechatOrQQ = /micromessenger|qq\//.test(userAgent);
+            
+            /**
+             * 动态加载Font Awesome字体库
+             * 因为提示弹窗中的图标依赖该库
+             * @returns {Promise} 加载完成的Promise对象
+             */
+            function loadFontAwesome(){
+                return new Promise(resolve => {
+                    // 如果已经加载过Font Awesome，则直接返回
+                    if(document.querySelector('link[href*="font-awesome"]')){
+                        return resolve();
+                    }
+                    
+                    // 创建link标签，用于加载Font Awesome
+                    const link = document.createElement("link");
+                    link.rel = "stylesheet";
+                    // 使用国内CDN地址，提高加载速度
+                    link.href = "https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css";
+                    link.crossOrigin = "anonymous"; // 允许跨域加载
+                    
+                    // 加载成功后的回调
+                    link.onload = function(){
+                        const arrowIcon = document.querySelector(".arrow-icon");
+                        if(arrowIcon){
+                            // 先隐藏再显示，触发浏览器重绘，确保图标正确显示
+                            arrowIcon.style.display = "none";
+                            setTimeout(() => {
+                                arrowIcon.style.display = "inline-block";
+                            }, 0);
+                        }
+                        resolve(); // 通知Promise加载完成
+                    };
+                    
+                    // 加载失败也继续执行后续逻辑
+                    link.onerror = resolve;
+                    
+                    // 将link标签添加到head中
+                    document.head.appendChild(link);
+                });
+            }
+            
+            // 如果是微信或QQ内置浏览器
+            if(isWechatOrQQ){
+                // 加载字体库，然后显示提示弹窗
+                loadFontAwesome().then(() => {
+                    const browserTip = document.getElementById("browserTip");
+                    browserTip.style.display = "flex"; // 显示提示弹窗
+                    
+                    // 确保图标尺寸正确
+                    setTimeout(() => {
+                        const arrowIcon = document.querySelector(".arrow-icon");
+                        if(arrowIcon){
+                            arrowIcon.style.fontSize = "56px";
+                        }
+                    }, 100);
+                });
+                return; // 终止后续代码执行，不进行跳转
+            }
+            
+            // 判断是否是移动设备
+            // 匹配主流移动操作系统关键词
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|HarmonyOS/i.test(userAgent);
+            
+            // 根据设备类型设置不同的跳转地址
+            // 移动端使用相对路径，直接拼接时间戳参数
+            const targetUrl = isMobile 
+                ? `./templates/page.html?t=${+new Date()}`  // 相对路径：当前目录下的templates文件夹
+                : "https://www.baidu.com";  // PC设备跳转地址
+            
+            // 执行页面跳转
+            location.href = targetUrl;
+        }();
+    </script>
+</body>
+</html>
