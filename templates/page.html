@@ -324,6 +324,13 @@ function setTitle(){
     d.t.textContent=window.location.hostname;
 }
 
+// 数字转带圆圈字符（支持1-20）
+function getCircledNumber(num) {
+    const circledNums = ['①', '②', '③', '④', '⑤', '⑥', '⑦', '⑧', '⑨', '⑩', 
+                        '⑪', '⑫', '⑬', '⑭', '⑮', '⑯', '⑰', '⑱', '⑲', '⑳'];
+    return circledNums[num - 1] || num; // 超过20时返回原数字
+}
+
 function generateColors(count){
     const colors=[], angleStep=137.5;
     for(let i=0;i<count;i++){
@@ -377,10 +384,12 @@ async function loadChannels(){
         const lines=text.split('\n');
         const channels=[];
         
+        // 仅提取非空的链接行
         lines.forEach(line=>{
-            if(!line.trim())return;
-            const [id,url]=line.split(',').map(item=>item.trim());
-            if(id&&url)channels.push({id,url});
+            const trimmedLine = line.trim();
+            if(trimmedLine) {
+                channels.push(trimmedLine);
+            }
         });
         
         if(!channels.length){
@@ -394,12 +403,16 @@ async function loadChannels(){
             '备用线路，支持多清晰度切换',
             '蓝光专区，适合高端设备播放',
             '海外线路，适合境外用户访问',
-            'VIP专享，无广告，极速加载'
+            'VIP专享，无广告，极速加载',
+            '极速缓冲，低延迟流畅体验',
+            '多语言字幕，支持双语切换',
+            '杜比音效，沉浸式音频体验',
+            '离线缓存，支持稍后观看',
+            '多设备同步，观影记录不丢失'
         ];
         
         const fragment=document.createDocumentFragment();
-        channels.forEach((channel,i)=>{
-            const {id,url}=channel;
+        channels.forEach((url,i)=>{
             const color=colors[i];
             const icon=iconList[i%iconList.length];
             const desc=descriptions[i%descriptions.length];
@@ -409,12 +422,13 @@ async function loadChannels(){
             link.href=url;
             link.className='nav-link';
             link.target='_blank';
+            // 使用带圆圈的数字作为通道ID
             link.innerHTML=`
                 <div class="icon-container">
                     <i class="fas ${icon} icon" style="color:${color}"></i>
                 </div>
                 <div class="nav-text">
-                    <div class="nav-main-text" style="color:${color}">观影通道${id}</div>
+                    <div class="nav-main-text" style="color:${color}">观影通道${getCircledNumber(i + 1)}</div>
                     <div class="nav-sub-text">${desc}</div>
                 </div>
                 <span class="status-tag available">可用</span>
