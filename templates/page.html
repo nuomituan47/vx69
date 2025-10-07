@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+<title>欢迎回家</title>
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css">
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/solid.min.css">
+<style>
+:root{
+    --b:#1a2232;
+    --s:rgba(36,46,68,0.85);
+    --t:#f5f8fc;
+    --g:#8a94a6;
+    --a:#a97fff;
+    --w:#f9c25e;
+    --su:#48ddb0;
+    --r:12px;
+    --tr:all .2s ease;
+    --sh:0 4px 12px rgba(0,0,0,0.15);
+    --shh:0 6px 16px rgba(0,0,0,0.25);
+}
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI','PingFang SC','Microsoft YaHei',system-ui,sans-serif;
+}
+body{
+    background:var(--b);
+    color:var(--t);
+    line-height:1.6;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    overflow-x:hidden;
+    position:relative;
+}
+body::before{
+    content:'';
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:radial-gradient(circle at 20% 30%,rgba(169,127,255,0.1) 0%,transparent 50%),
+                radial-gradient(circle at 80% 70%,rgba(92,165,254,0.1) 0%,transparent 50%);
+    z-index:-1;
+}
+.alert-bar{
+    background:linear-gradient(90deg,var(--w),#fed779);
+    color:#1e293b;
+    text-align:center;
+    padding:8px 12px;
+    font-size:13px;
+    font-weight:600;
+    width:100%;
+    box-shadow:0 2px 8px rgba(249,194,94,0.3);
+    position:relative;
+    overflow:hidden;
+    z-index:10;
+}
+.alert-bar::after{display:none;}
+.container{
+    max-width:800px;
+    width:100%;
+    margin:0 auto;
+    padding:15px;
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+header{
+    text-align:center;
+    margin:15px 0 25px;
+    width:100%;
+}
+.title-container{
+    margin-bottom:8px;
+    position:relative;
+    display:inline-block;
+}
+.title-line.top{
+    font-size:1.3rem;
+    margin-bottom:5px;
+    font-weight:700;
+    background:linear-gradient(90deg,#ff6666,#ffffff);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    text-shadow:0 0 10px rgba(255,102,102,0.4);
+}
+.title-line.main{
+    font-size:2.2rem;
+    background:linear-gradient(135deg,var(--a),#ccb0ff);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    text-shadow:0 0 15px rgba(169,127,255,0.4);
+    font-weight:800;
+    letter-spacing:-0.5px;
+    position:relative;
+    display:inline-block;
+}
+.title-line.main::after{
+    content:'';
+    position:absolute;
+    bottom:-6px;
+    left:25%;
+    width:50%;
+    height:2px;
+    background:linear-gradient(90deg,transparent,var(--a),transparent);
+    border-radius:3px;
+}
+.nav-container{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:12px;
+    margin-bottom:25px;
+    width:100%;
+    max-width:500px;
+}
+.nav-link{
+    background:var(--s);
+    backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,0.15);
+    border-radius:var(--r);
+    padding:14px 20px;
+    text-decoration:none;
+    font-size:1.1rem;
+    font-weight:600;
+    transition:var(--tr);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    position:relative;
+    overflow:hidden;
+    box-shadow:var(--sh);
+    width:100%;
+    z-index:1;
+}
+.nav-link::before{
+    content:'';
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:linear-gradient(135deg,rgba(169,127,255,0.1),rgba(92,165,254,0.1));
+    opacity:0;
+    transition:var(--tr);
+    z-index:-1;
+}
+.nav-link:hover{
+    transform:translateY(-2px);
+    box-shadow:var(--shh);
+}
+.nav-link:hover::before{opacity:1;}
+.icon-container{
+    width:40px;
+    display:flex;
+    justify-content:center;
+    margin-right:12px;
+}
+.nav-link .icon{
+    font-size:1.8rem;
+    filter:drop-shadow(0 2px 3px rgba(0,0,0,0.2));
+    transition:color .2s ease,filter .2s ease;
+}
+.nav-link:hover .icon{
+    filter:drop-shadow(0 0 8px rgba(255,255,255,0.4));
+}
+.nav-text{
+    text-align:left;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    flex-grow:1;
+}
+.nav-main-text{
+    font-size:1.1rem;
+    font-weight:600;
+    line-height:1.2;
+    transition:text-shadow .2s ease;
+}
+.nav-link:hover .nav-main-text{
+    text-shadow:0 0 6px rgba(255,255,255,0.3);
+}
+.nav-sub-text{
+    font-size:0.75rem;
+    margin-top:3px;
+    line-height:1.2;
+    transition:color .2s ease;
+    color:var(--g)!important;
+}
+.status-tag{
+    font-size:0.8rem;
+    padding:2px 8px;
+    border-radius:12px;
+    font-weight:500;
+    flex-shrink:0;
+}
+.status-tag.available{
+    background:rgba(72,221,176,0.2);
+    color:var(--su);
+}
+.floating-elements{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    z-index:-1;
+}
+.floating-element{
+    position:absolute;
+    background:rgba(169,127,255,0.05);
+    border-radius:50%;
+    animation:float 30s infinite linear;
+    box-shadow:0 0 20px rgba(169,127,255,0.08);
+}
+@keyframes float{
+    0%{transform:translateY(0);}
+    50%{transform:translateY(-20px);}
+    100%{transform:translateY(0);}
+}
+.particles{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    z-index:-1;
+}
+.particle{
+    position:absolute;
+    background:rgba(169,127,255,0.25);
+    border-radius:50%;
+    animation:particle-float 20s infinite linear;
+}
+@keyframes particle-float{
+    0%{transform:translateY(100vh);opacity:0;}
+    10%{opacity:1;}
+    90%{opacity:1;}
+    100%{transform:translateY(-100px);opacity:0;}
+}
+.empty-fill{
+    width:100%;
+    max-width:500px;
+    margin-bottom:15px;
+}
+.empty-line{
+    height:20px;
+    width:100%;
+    margin-bottom:10px;
+    background:rgba(255,255,255,0.05);
+    border-radius:4px;
+}
+.loading-message{display:none;}
+.loading-message.error{
+    display:block;
+    color:#ff6384;
+    padding:15px;
+    text-align:center;
+    width:100%;
+}
+@media (max-width:768px){
+    .container{padding:10px;}
+    .title-line.main{font-size:1.8rem;}
+    .title-line.top{font-size:1.1rem;}
+    .nav-link{padding:12px 15px;}
+    .nav-main-text{font-size:1rem;}
+    .nav-sub-text{font-size:0.7rem;}
+    .icon-container{width:36px;}
+}
+@media (max-width:480px){
+    .title-line.main{font-size:1.6rem;}
+    .title-line.top{font-size:1rem;}
+    .nav-link{padding:10px;}
+    .nav-main-text{font-size:0.95rem;}
+    .nav-sub-text{font-size:0.65rem;}
+    .empty-line{height:16px;margin-bottom:8px;}
+    .icon-container{width:32px;}
+}
+</style>
+</head>
+<body>
+<div class="floating-elements">
+    <div class="floating-element" style="width:100px;height:100px;top:15%;left:8%;animation-duration:35s;"></div>
+    <div class="floating-element" style="width:150px;height:150px;top:65%;right:12%;animation-duration:40s;"></div>
+</div>
+<div class="particles" id="p"></div>
+<div class="alert-bar"><i class="fas fa-exclamation-circle"></i> 如支付成功后无法观看，尝试重新进入通道点已购观看</div>
+
+<div class="container">
+    <header>
+        <div class="title-container">
+            <div class="title-line top">收藏网址 永不失联</div>
+            <div class="title-line main" id="t">...</div>
+        </div>
+    </header>
+    <div class="nav-container" id="n"></div>
+</div>
+
+<div class="empty-fill">
+    <div class="empty-line"></div>
+    <div class="empty-line"></div>
+</div>
+
+<script>
+const d={
+    t:document.getElementById('t'),
+    n:document.getElementById('n'),
+    p:document.getElementById('p'),
+    f:document.querySelector('.floating-elements')
+};
+
+function setTitle(){
+    d.t.textContent=window.location.hostname;
+}
+
+// 数字转带圆圈字符（支持1-20）
+function getCircledNumber(num) {
+    const circledNums = ['①', '②', '③', '④', '⑤', '⑥', '⑦', '⑧', '⑨', '⑩', 
+                        '⑪', '⑫', '⑬', '⑭', '⑮', '⑯', '⑰', '⑱', '⑲', '⑳'];
+    return circledNums[num - 1] || num; // 超过20时返回原数字
+}
+
+function generateColors(count){
+    const colors=[], angleStep=137.5;
+    for(let i=0;i<count;i++){
+        const hue=(i*angleStep)%360;
+        colors.push(hslToHex(hue,70,65));
+    }
+    return colors;
+}
+
+function hslToHex(h,s,l){
+    h/=360;
+    s/=100;
+    l/=100;
+    let r,g,b;
+    if(s===0){
+        r=g=b=l;
+    }else{
+        const hue2=(p,q,t)=>{
+            if(t<0)t+=1;
+            if(t>1)t-=1;
+            if(t<1/6)return p+(q-p)*6*t;
+            if(t<1/2)return q;
+            if(t<2/3)return p+(q-p)*(2/3-t)*6;
+            return p;
+        };
+        const q=l<0.5?l*(1+s):l+s-l*s;
+        const p=2*l-q;
+        r=hue2(p,q,h+1/3);
+        g=hue2(p,q,h);
+        b=hue2(p,q,h-1/3);
+    }
+    const toHex=x=>{
+        const hex=Math.round(x*255).toString(16);
+        return hex.length===1?'0'+hex:hex;
+    };
+    return `#${toHex(r)}${toHex(g)}${toHex(b)}`.toUpperCase();
+}
+
+const iconList=['fa-film','fa-tv','fa-video','fa-play-circle','fa-clapperboard'];
+async function loadChannels(){
+    try{
+        const controller=new AbortController();
+        const timeout=setTimeout(()=>controller.abort(),5000);
+        
+        const response=await fetch('channels.txt',{signal:controller.signal});
+        clearTimeout(timeout);
+        
+        if(!response.ok)throw new Error(`文件加载失败: ${response.statusText}`);
+        
+        const text=await response.text();
+        const lines=text.split('\n');
+        const channels=[];
+        
+        // 仅提取非空的链接行
+        lines.forEach(line=>{
+            const trimmedLine = line.trim();
+            if(trimmedLine) {
+                channels.push(trimmedLine);
+            }
+        });
+        
+        if(!channels.length){
+            d.n.innerHTML='<div class="loading-message error">未找到可用的观影通道</div>';
+            return;
+        }
+        
+        const colors=generateColors(channels.length);
+        const descriptions=[
+            '高清画质，适合大多数设备',
+            '备用线路，支持多清晰度切换',
+            '蓝光专区，适合高端设备播放',
+            '海外线路，适合境外用户访问',
+            'VIP专享，无广告，极速加载',
+            '极速缓冲，低延迟流畅体验',
+            '多语言字幕，支持双语切换',
+            '杜比音效，沉浸式音频体验',
+            '离线缓存，支持稍后观看',
+            '多设备同步，观影记录不丢失'
+        ];
+        
+        const fragment=document.createDocumentFragment();
+        channels.forEach((url,i)=>{
+            const color=colors[i];
+            const icon=iconList[i%iconList.length];
+            const desc=descriptions[i%descriptions.length];
+            const alphaColor=color+'30';
+            
+            const link=document.createElement('a');
+            link.href=url;
+            link.className='nav-link';
+            link.target='_blank';
+            // 使用带圆圈的数字作为通道ID
+            link.innerHTML=`
+                <div class="icon-container">
+                    <i class="fas ${icon} icon" style="color:${color}"></i>
+                </div>
+                <div class="nav-text">
+                    <div class="nav-main-text" style="color:${color}">观影通道${getCircledNumber(i + 1)}</div>
+                    <div class="nav-sub-text">${desc}</div>
+                </div>
+                <span class="status-tag available">可用</span>
+            `;
+            
+            link.addEventListener('mouseenter',()=>{
+                link.style.boxShadow=`var(--shh),0 0 15px ${alphaColor}`;
+                link.style.borderColor=color;
+            });
+            link.addEventListener('mouseleave',()=>{
+                link.style.boxShadow='var(--sh)';
+                link.style.borderColor='rgba(255,255,255,0.15)';
+            });
+            
+            fragment.appendChild(link);
+        });
+        
+        d.n.appendChild(fragment);
+    }catch(error){
+        console.error('通道加载异常:',error);
+        const msg=error.name==='AbortError'?'加载超时，请重试':error.message;
+        d.n.innerHTML=`<div class="loading-message error">加载通道失败: ${msg}</div>`;
+    }
+}
+
+function createParticles(){
+    const count=window.innerWidth<=480?4:8;
+    const fragment=document.createDocumentFragment();
+    
+    setTimeout(()=>{
+        for(let i=0;i<count;i++){
+            const particle=document.createElement('div');
+            particle.classList.add('particle');
+            const size=Math.random()*2+1;
+            particle.style.width=`${size}px`;
+            particle.style.height=`${size}px`;
+            particle.style.left=`${Math.random()*100}%`;
+            particle.style.animationDuration=`${Math.random()*15+15}s`;
+            particle.style.animationDelay=`${Math.random()*5}s`;
+            fragment.appendChild(particle);
+        }
+        d.p.appendChild(fragment);
+    },1000);
+}
+
+function createFloatingElements(){
+    const count=3;
+    const fragment=document.createDocumentFragment();
+    
+    for(let i=0;i<count;i++){
+        const floatEl=document.createElement('div');
+        floatEl.classList.add('floating-element');
+        const size=Math.random()*80+50;
+        floatEl.style.width=`${size}px`;
+        floatEl.style.height=`${size}px`;
+        floatEl.style.top=`${Math.random()*100}%`;
+        floatEl.style.left=`${Math.random()*100}%`;
+        floatEl.style.animationDuration=`${Math.random()*20+20}s`;
+        fragment.appendChild(floatEl);
+    }
+    
+    d.f.appendChild(fragment);
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+    setTitle();
+    loadChannels();
+    createParticles();
+    setTimeout(createFloatingElements,1500);
+});
+</script>
+</body>
+</html>
