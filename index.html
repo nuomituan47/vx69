@@ -1,1 +1,78 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>跳转中...</title><style>*{margin:0;padding:0;box-sizing:border-box}body{width:100vw;height:100vh;overflow:hidden}.browser-tip{position:fixed;inset:0;background:rgba(0,0,0,.8);display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:9999;color:#fff;padding:20px}.tip-image{position:absolute;top:20px;right:20px;width:80px;height:80px;display:flex;align-items:center;justify-content:center}.arrow-icon{font-size:56px;color:#fff;opacity:1;width:auto;height:auto}.browser-tip h2{font-size:24px;margin-bottom:20px;text-align:center}.browser-tip p{font-size:18px;max-width:80%;margin:0 auto;line-height:1.6;text-align:center}</style></head><body><div class="browser-tip" id="browserTip" style="display:none"><div class="tip-image"><i class="fa fa-external-link arrow-icon" aria-hidden="true"></i></div><h2>请在外部浏览器中打开</h2><p>当前页面在QQ/微信中可能无法正常显示，请点击右上角<br>选择"在浏览器中打开"</p></div><script>!function(){const e=navigator.userAgent.toLowerCase(),t={isWechatOrQQ:/micromessenger|qq\//,isMobile:/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|HarmonyOS/i};let n=!1,i=!1;for(const o in t)t[o].test(e)&&(o==="isWechatOrQQ"?n=!0:o==="isMobile"&&(i=!0));if(n)return function(){return new Promise(o=>{if(document.querySelector('link[href*="font-awesome"]'))return o();const r=document.createElement("link");r.rel="stylesheet",r.href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css",r.crossOrigin="anonymous",r.onload=function(){const c=document.querySelector(".arrow-icon");c&&(c.style.display="none",setTimeout(()=>{c.style.display="inline-block"},0)),o()},r.onerror=o,document.head.appendChild(r)})}().then(()=>{const e=document.getElementById("browserTip");e.style.display="flex",setTimeout(()=>{const e=document.querySelector(".arrow-icon");e&&(e.style.fontSize="56px")},100)}),void 0;const o=Date.now(),r=i?`/templates/page.html?t=${o}`:"https://www.baidu.com";location.href=r}();</script></body></html>
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>跳转中...</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden
+        }
+
+        .browser-tip {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            color: #fff;
+            padding: 20px
+        }
+
+        .tip-image {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+
+        .arrow-icon {
+            font-size: 56px;
+            color: #fff;
+            opacity: 1;
+            width: auto;
+            height: auto
+        }
+
+        .browser-tip h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center
+        }
+
+        .browser-tip p {
+            font-size: 18px;
+            max-width: 80%;
+            margin: 0 auto;
+            line-height: 1.6;
+            text-align: center
+        }
+    </style>
+</head>
+
+<body>
+    <div class="browser-tip" id="browserTip" style="display:none">
+        <div class="tip-image"><i class="fa fa-external-link arrow-icon" aria-hidden="true"></i></div>
+        <h2>请在外部浏览器中打开</h2>
+        <p>当前页面在QQ/微信中可能无法正常显示，请点击右上角<br>选择"在浏览器中打开"</p>
+    </div>
+    <script>!function () { const e = navigator.userAgent.toLowerCase(), t = { isWechatOrQQ: /micromessenger|qq\//, isMobile: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|HarmonyOS/i }; let n = !1, i = !1; for (const o in t) t[o].test(e) && (o === "isWechatOrQQ" ? n = !0 : o === "isMobile" && (i = !0)); if (n) return function () { return new Promise(o => { if (document.querySelector('link[href*="font-awesome"]')) return o(); const r = document.createElement("link"); r.rel = "stylesheet", r.href = "https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css", r.crossOrigin = "anonymous", r.onload = function () { const c = document.querySelector(".arrow-icon"); c && (c.style.display = "none", setTimeout(() => { c.style.display = "inline-block" }, 0)), o() }, r.onerror = o, document.head.appendChild(r) }) }().then(() => { const e = document.getElementById("browserTip"); e.style.display = "flex", setTimeout(() => { const e = document.querySelector(".arrow-icon"); e && (e.style.fontSize = "56px") }, 100) }), void 0; const o = Date.now(), r = i ? `/templates/page.html?t=${o}` : "https://www.baidu.com"; location.href = r }();</script>
+</body>
+
+</html>
