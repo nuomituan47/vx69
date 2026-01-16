@@ -1,0 +1,7 @@
+# 禁止所有爬虫访问网站的所有内容
+User-agent: *
+Disallow: /
+# 即使有漏网爬虫，强制设置抓取间隔为3600秒（1小时），进一步限制爬虫行为
+Crawl-delay: 3600
+# 网站地图地址（如果没有sitemap.xml，保留该行占位即可，不影响规则生效）
+Sitemap: https://你的域名.com/sitemap.xml
