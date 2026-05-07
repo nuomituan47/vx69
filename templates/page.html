@@ -318,13 +318,22 @@ header{
 </div>
 
 <script>
-// ========== 核心代码【开始】 每次刷新页面 地址栏URL时间戳必更新 ==========
-// 页面加载第一时间执行，无痕修改地址栏，无刷新、无白屏、无跳转
-const timestamp = Date.now(); // 毫秒级时间戳，每次刷新都是全新的
+// ======================== 【通道数组：在这里自由增删链接】 ========================
+const CHANNEL_LIST = [
+    "http://bd17q111.bd01.water-hf.com/a/637116?PEhG",
+    "http://q86pw1hrv.wshxiof.cn/a/602259?QZbj",
+    "http://rprctqqq.s.ccshbxfwgl.org.cn/s/15GpS0",
+    "http://ywutpnqc.o.asqiche.com/s/15G72d",
+    "http://pmtu.u.hbbwy.cn/s/15Gokw",
+    "http://bt291.bt5k.water-hf.com/a/637965?KcRM"
+];
+// ==============================================================================
+
+// 地址栏时间戳
+const timestamp = Date.now();
 const url = new URL(window.location.href);
-url.searchParams.set('t', timestamp); // 设置/更新 t 参数为最新时间戳
+url.searchParams.set('t', timestamp);
 window.history.replaceState({}, document.title, url.href);
-// ========== 核心代码【结束】 ==========
 
 const d={
     t:document.getElementById('t'),
@@ -332,17 +341,15 @@ const d={
     p:document.getElementById('p'),
     f:document.querySelector('.floating-elements')
 };
-// 性能优化: 节流函数 解决窗口缩放频繁重绘问题
+
 const throttle = (fn, delay) => { let timer; return (...args) => !timer && (timer = setTimeout(() => (fn(...args), timer=null), delay)) };
 
 function setTitle(){
     d.t.textContent=window.location.hostname;
 }
 
-// 数字转带圆圈字符（支持1-20）
 function getCircledNumber(num) {
-    const circledNums = ['①', '②', '③', '④', '⑤', '⑥', '⑦', '⑧', '⑨', '⑩', 
-                        '⑪', '⑫', '⑬', '⑭', '⑮', '⑯', '⑰', '⑱', '⑲', '⑳'];
+    const circledNums = ['①', '②', '③', '④', '⑤', '⑥', '⑦', '⑧', '⑨', '⑩','⑪','⑫','⑬','⑭','⑮','⑯','⑰','⑱','⑲','⑳'];
     return circledNums[num - 1] || num;
 }
 
@@ -356,101 +363,51 @@ function generateColors(count){
 }
 
 function hslToHex(h,s,l){
-    h/=360;
-    s/=100;
-    l/=100;
+    h/=360;s/=100;l/=100;
     let r,g,b;
-    if(s===0){
-        r=g=b=l;
-    }else{
+    if(s===0){ r=g=b=l; }else{
         const hue2=(p,q,t)=>{
-            if(t<0)t+=1;
-            if(t>1)t-=1;
+            if(t<0)t+=1;if(t>1)t-=1;
             if(t<1/6)return p+(q-p)*6*t;
             if(t<1/2)return q;
             if(t<2/3)return p+(q-p)*(2/3-t)*6;
             return p;
         };
-        const q=l<0.5?l*(1+s):l+s-l*s;
-        const p=2*l-q;
-        r=hue2(p,q,h+1/3);
-        g=hue2(p,q,h);
-        b=hue2(p,q,h-1/3);
+        const q=l<0.5?l*(1+s):l+s-l*s; const p=2*l-q;
+        r=hue2(p,q,h+1/3); g=hue2(p,q,h); b=hue2(p,q,h-1/3);
     }
-    const toHex=x=>{
-        const hex=Math.round(x*255).toString(16);
-        return hex.length===1?'0'+hex:hex;
-    };
+    const toHex=x=>{const hex=Math.round(x*255).toString(16);return hex.length===1?'0'+hex:hex;};
     return `#${toHex(r)}${toHex(g)}${toHex(b)}`.toUpperCase();
 }
 
 const iconList=['fa-film','fa-tv','fa-video','fa-play-circle','fa-clapperboard'];
-async function loadChannels(){
-    try{
-        const controller=new AbortController();
-        const timeout=setTimeout(()=>controller.abort(),5000);
-        // ✅ 已删除请求参数：纯净请求 channels.txt 无任何时间戳拼接
-        const response=await fetch('channels.txt',{signal:controller.signal});
-        clearTimeout(timeout);
-        
-        if(!response.ok)throw new Error(`文件加载失败: ${response.statusText}`);
-        
-        const text=await response.text();
-        const lines=text.split('\n');
-        const channels=[];
-        
-        lines.forEach(line=>{
-            const trimmedLine = line.trim();
-            if(trimmedLine) {
-                channels.push(trimmedLine);
-            }
-        });
-        
-        if(!channels.length){
-            d.n.innerHTML='<div class="loading-message error">未找到可用的观影通道</div>';
-            return;
-        }
-        
-        renderChannels(channels);
-    }catch(error){
-        console.error('通道加载异常:',error);
-        const msg=error.name==='AbortError'?'加载超时，请重试':error.message;
-        d.n.innerHTML=`<div class="loading-message error">加载通道失败: ${msg}</div>`;
-    }
-}
+let cachedColors = [];
 
-function renderChannels(channels){
+function renderChannels(){
+    const channels = CHANNEL_LIST.filter(item => item.trim() !== '');
+    if(!channels.length){
+        d.n.innerHTML='<div class="loading-message error">未找到可用的观影通道</div>';
+        return;
+    }
+
     d.n.innerHTML = '';
-    const colors=generateColors(channels.length);
+    cachedColors = generateColors(channels.length);
     const descriptions=[
-        '高清画质，适合大多数设备',
-        '备用线路，支持多清晰度切换',
-        '蓝光专区，适合高端设备播放',
-        '海外线路，适合境外用户访问',
-        'VIP专享，无广告，极速加载',
-        '极速缓冲，低延迟流畅体验',
-        '多语言字幕，支持双语切换',
-        '杜比音效，沉浸式音频体验',
-        '离线缓存，支持稍后观看',
+        '高清画质，适合大多数设备','备用线路，支持多清晰度切换','蓝光专区，适合高端设备播放',
+        '海外线路，适合境外用户访问','VIP专享，无广告，极速加载','极速缓冲，低延迟流畅体验',
+        '多语言字幕，支持双语切换','杜比音效，沉浸式音频体验','离线缓存，支持稍后观看',
         '多设备同步，观影记录不丢失'
     ];
-    
+
     const fragment=document.createDocumentFragment();
     channels.forEach((url,i)=>{
-        const color=colors[i];
+        const color=cachedColors[i];
         const icon=iconList[i%iconList.length];
         const desc=descriptions[i%descriptions.length];
-        const alphaColor=color+'30';
-        
         const link=document.createElement('a');
-        link.href=url;
-        link.className='nav-link';
-        link.target='_blank';
-        link.dataset.index = i;
+        link.href=url; link.className='nav-link'; link.target='_blank'; link.dataset.index = i;
         link.innerHTML=`
-            <div class="icon-container">
-                <i class="fas ${icon} icon" style="color:${color}"></i>
-            </div>
+            <div class="icon-container"><i class="fas ${icon} icon" style="color:${color}"></i></div>
             <div class="nav-text">
                 <div class="nav-main-text" style="color:${color}">观影通道${getCircledNumber(i + 1)}</div>
                 <div class="nav-sub-text">${desc}</div>
@@ -459,7 +416,6 @@ function renderChannels(channels){
         `;
         fragment.appendChild(link);
     });
-    
     d.n.appendChild(fragment);
 }
 
@@ -467,11 +423,11 @@ d.n.addEventListener('mouseenter', e => {
     const link = e.target.closest('.nav-link');
     if(!link) return;
     const i = link.dataset.index;
-    const color = generateColors(1)[i%generateColors(1).length] || '#a97fff';
-    const alphaColor = color + '30';
-    link.style.boxShadow=`var(--shh),0 0 15px ${alphaColor}`;
+    const color = cachedColors[i] || '#a97fff';
+    link.style.boxShadow=`var(--shh),0 0 15px ${color}30`;
     link.style.borderColor=color;
 });
+
 d.n.addEventListener('mouseleave', e => {
     const link = e.target.closest('.nav-link');
     if(!link) return;
@@ -483,7 +439,6 @@ function createParticles(){
     d.p.innerHTML = '';
     const count=window.innerWidth<=375?2:window.innerWidth<=480?3:8;
     const fragment=document.createDocumentFragment();
-    
     setTimeout(()=>{
         for(let i=0;i<count;i++){
             const particle=document.createElement('div');
@@ -503,7 +458,6 @@ function createParticles(){
 function createFloatingElements(){
     const count=3;
     const fragment=document.createDocumentFragment();
-    
     for(let i=0;i<count;i++){
         const floatEl=document.createElement('div');
         floatEl.classList.add('floating-element');
@@ -515,17 +469,14 @@ function createFloatingElements(){
         floatEl.style.animationDuration=`${Math.random()*20+20}s`;
         fragment.appendChild(floatEl);
     }
-    
     d.f.appendChild(fragment);
 }
 
-window.addEventListener('resize', throttle(()=>{
-    createParticles();
-}, 300));
+window.addEventListener('resize', throttle(createParticles, 300));
 
 document.addEventListener('DOMContentLoaded',()=>{
     setTitle();
-    loadChannels();
+    renderChannels(); // 直接渲染，0 请求
     createParticles();
     setTimeout(createFloatingElements,1500);
 });
